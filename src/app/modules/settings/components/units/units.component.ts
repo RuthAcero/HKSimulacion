@@ -419,7 +419,7 @@ export class UnitsComponent implements OnInit {
       this.seeTable = true;
       console.log(error);
       this.shareService.showErrorToast(error);
-      this.ngxLoader.stopLoader('loader-dvst-add');
+      this.ngxLoader.stopLoader('loader-go-add');
     }
   }
 
@@ -543,7 +543,7 @@ export class UnitsComponent implements OnInit {
           notFoundText: 'No se encontraron dispositivos',
           placeholder: 'Selección de dispositivo',
           multiple: false,
-          clearable: false,
+          clearable: true,
           positionDrop: 'top'
         },
       },

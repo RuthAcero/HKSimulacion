@@ -1,7 +1,11 @@
 <ng-container *ngIf="seeMonitoring">
-  <app-monitoring (out)="getBack($event)"></app-monitoring>
+  <div class="containerDiv">
+    <app-monitoring [typeMap]="typeMap" (out)="getBack($event)"></app-monitoring>
+  </div>
 </ng-container>
 
 <ng-container *ngIf="seeList">
-  <app-table-devices></app-table-devices>
+  <div class="containerDiv">
+    <app-device-info></app-device-info>
+  </div>
 </ng-container>

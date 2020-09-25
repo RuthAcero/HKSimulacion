@@ -1,9 +1,9 @@
 <div id="appMainFilter">
   <div class="row">
     <div class="col-md-7">
-      <ng-select style="width: 280px; margin-top: 10px;" [closeOnSelect]="false" [items]="photosBuffer" bindLabel="name"
-        [multiple]="true" [virtualScroll]="true" [loading]="loading" (scroll)="onScroll($event)" (change)="changeItems()"
-        [(ngModel)]="lstDevicesList" (scrollToEnd)="fetchMoreA(select.filterValue)" #select>
+      <ng-select style="width: 280px; margin-top: 10px;" [closeOnSelect]="false" [items]="itemsBuffer" bindLabel="name"
+        [multiple]="true" [virtualScroll]="true" [loading]="loading" (scroll)="onScroll($event)"
+        (change)="changeItems()" [(ngModel)]="lstDevicesList" (scrollToEnd)="fetchMoreA(select.filterValue)" #select>
         <ng-template ng-header-tmp>
           <button class="buttonDefault" (click)="selectedAllDev(true)"> Seleccionar todo </button>
           <button class="buttonDefault" (click)="selectedAllDev(false)"> Quitar selección </button>
@@ -36,26 +36,36 @@
     </div>
     <div class="col-md-5" style="display: flex;">
       <div class="containerButton">
-        <button class="buttonItem">
+        <button class="buttonItem" (click)="selectedMenuItem(0,0)">
           <fa-icon class="iconMen" [icon]="['fas','map-marked']"></fa-icon>
         </button><br>
         <label>Mapa</label>
       </div>
       <div class="containerButton">
-        <button class="buttonItem">
+        <button class="buttonItem" (click)="selectedMenuItem(1,0)">
           <fa-icon class="iconMen" [icon]="['fas','truck']"></fa-icon>
         </button><br>
         <label>Vehículos</label>
       </div>
-      <div class="containerButton">
+      <!-- 
+  <div class="containerButton">
         <p-menu #menu [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'" [popup]="true" [model]="itemsMenu"
           [appendTo]="'body'" [style]="{width:'140px'}"></p-menu>
         <button type="button" class="buttonItem" (click)="menu.toggle($event)">
           <fa-icon class="iconMen" [icon]="['fas','draw-polygon']"></fa-icon><br>
         </button><br>
         <label>Zonas</label>
+      </div>
+       -->
 
-        <!-- 
+
+    </div>
+  </div>
+</div>
+
+
+
+<!-- 
 <div ngbDropdown class="d-inline-block" placement="right">
           <button class="buttonItem" ngbDropdownToggle >
             <fa-icon class="iconMen" [icon]="['fas','draw-polygon']"></fa-icon><br>
@@ -67,8 +77,3 @@
           </div>
         </div>
          -->
-
-      </div>
-    </div>
-  </div>
-</div>

@@ -34,4 +34,6 @@ export const Constants = {
         { header: 'Eliminar', key: 'delete' },
         { header: 'Descargar', key: 'download' },
     ],
+    markerSGV: 'm6.210664,24.128505l6.40625,-20.937498l6.40625,20.937498l-12.812501,0z',
+    markerSGVStop: 'm1.201863,14.303764l13.089577,-13.207501l13.089577,13.207501l-13.089577,13.207501l-13.089577,-13.207501z',
 }

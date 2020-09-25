@@ -2,19 +2,13 @@
   <app-header (changeModule)="changeItem($event)"></app-header>
   <div class="containerInfo">
     <ng-container *ngIf="itemMenuSelected === 0">
-      <div class="containerDiv">
-        <app-main-monitoring></app-main-monitoring>
-      </div>
+      <app-main-monitoring></app-main-monitoring>
     </ng-container>
     <ng-container *ngIf="itemMenuSelected === 1">
-      <div class="containerDiv">
-        <app-events></app-events>
-      </div>
+      <app-events></app-events>
     </ng-container>
     <ng-container *ngIf="itemMenuSelected === 2">
-      <div class="containerDiv">
-        <app-main-settings></app-main-settings>
-      </div>
+      <app-main-settings></app-main-settings>
     </ng-container>
   </div>
 </div>

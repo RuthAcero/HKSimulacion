@@ -1,0 +1,31 @@
+#appDeviceInfo {
+    width: 100%;
+    text-align: center;
+    padding: 8px;
+    .containerMenu {
+        text-align: center;
+        z-index: 1;
+        width: 525px;
+        top: 10px;
+        border: 1px solid rgba(113, 113, 113, 0.347);
+        border-radius: 4px;
+        background: white;
+        padding: 10px;
+        margin-left: 10px;
+
+        .row {
+            width: 100%;
+        }
+    }
+
+    .containerTable {
+        position: relative;
+        text-align: left;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .tittle {
+        color: #003756;
+    }
+}

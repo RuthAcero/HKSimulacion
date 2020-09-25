@@ -1,6 +1,6 @@
 #appMainSettings {
     width: 100%;
-    padding: 0px 15px 0px 14px;
+    padding: 8px 15px 0px 14px;
 
     .list-group-item {
         &:hover {
@@ -9,7 +9,7 @@
     }
 
     .active-item {
-        background: #003756;
+        background: #1179b6;
         color: white;
     }
 }

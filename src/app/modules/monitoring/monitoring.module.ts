@@ -9,6 +9,7 @@ import { ToolsModule } from '../tools/tools.module';
 import { NgBootstrpMModule } from '../ng-bootstrp-m/ng-bootstrp-m.module';
 import { MainMonitoringComponent } from './components/main-monitoring/main-monitoring.component';
 import { MainFilterComponent } from './components/main-filter/main-filter.component';
+import { DeviceInfoComponent } from './components/device-info/device-info.component';
 
 
 @NgModule({
@@ -20,7 +21,7 @@ import { MainFilterComponent } from './components/main-filter/main-filter.compon
     NgBootstrpMModule,
     ToolsModule,
   ],
-  declarations: [MonitoringComponent, MapComponent, TableDevicesComponent, MainMonitoringComponent, MainFilterComponent],
+  declarations: [MonitoringComponent, MapComponent, TableDevicesComponent, MainMonitoringComponent, MainFilterComponent, DeviceInfoComponent],
   exports: [MonitoringComponent, MainMonitoringComponent]
 })
 export class MonitoringModule { }

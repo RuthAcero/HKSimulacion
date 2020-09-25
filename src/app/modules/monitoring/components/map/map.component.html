@@ -1,3 +1,79 @@
-<p>
-  map works!
-</p>
+<div id="appMap">
+  <agm-map #AgmMap [style.height]="heightContent + 'px'" style="width: 100%;" [latitude]="lat" [longitude]="lng"
+    [zoom]="zoomMap" (mapReady)="onMapReady($event)">
+    <agm-marker-cluster
+      imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
+      <ng-container *ngFor="let itemDevice of lstDevices">
+        <ng-container *ngIf="itemDevice.latitude !== 0 && itemDevice.longitude !== 0">
+          <agm-marker
+            [label]="{text: itemDevice.name, color:'rgb(0, 111, 148)',  fontWeight: 'bold', backgroundColor:'white'}"
+            [iconUrl]="itemDevice.iconUrl" [latitude]="itemDevice.latitude" [longitude]="itemDevice.longitude"
+            (markerClick)="newItemSelected(itemDevice)">
+            <agm-info-window>
+              <div id="windowInfo">
+                <div class="windowBody">
+                  <ng-container *ngIf="itemDevice.type === 'GO'">
+                    <ng-container * ngIf="!itemDevice.device">
+                      <label class="title"> <b> {{itemDevice.name}} </b> </label>
+                      <label class="subTitle"> <b> VIN: </b> {{itemDevice.vin }} </label><br>
+                      <label class="subTitle"> <b> Número serial: </b> {{itemDevice.serialNumber}} </label><br>
+                      <label class="subTitle"> <b> Placa: </b> {{itemDevice.plate}} </label><br>
+                    </ng-container>
+                    <ng-container *ngIf="itemDevice.device">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label class="title"> <b> {{itemDevice.name}} </b> </label>
+                          <label class="subTitle"> <b> VIN: </b> {{itemDevice.vin }} </label><br>
+                          <label class="subTitle"> <b> Número serial: </b> {{itemDevice.serialNumber}} </label><br>
+                          <label class="subTitle"> <b> Placa: </b> {{itemDevice.plate}} </label><br>
+                        </div>
+                        <div class="col-md-6">
+                          <label class="subTitle"> <b> Dispositivo conectado: </b></label><br>
+                          <label class="subTitle"> <b> Económico: </b> {{itemDevice.device?.name }} </label><br>
+                          <label class="subTitle"> <b> IMEI: </b> {{itemDevice.device?.name }} </label><br>
+                          <label class="subTitle"> <b> Placa: </b> {{itemDevice.device?.plate }} </label><br>
+                        </div>
+                      </div>
+                    </ng-container>
+
+                  </ng-container>
+                  <ng-container *ngIf="itemDevice.type === 'ST'">
+                    <label class="subTitle"> <b> IMEI: </b> {{itemDevice.imei }} </label><br>
+                    <label class="subTitle"> <b> Placa: </b> {{itemDevice.plate}} </label><br>
+                  </ng-container>
+                  <br>
+                  <label class="labelItem" *ngIf="itemDevice.speed <= 0">
+                    <fa-icon class="iconStop" [icon]="['fas','stop-circle']"></fa-icon>
+                    Detenido
+                  </label>
+                  <label class="labelItem" *ngIf="itemDevice.speed > 0">
+                    <fa-icon class="iconDriving" [icon]="['fas','signal']"></fa-icon>
+                    Conduciendo
+                  </label>
+                  <label class="labelItem" *ngIf="itemDevice.speed > 0">
+                    <fa-icon class="iconDriving" [icon]="['fas','tachometer-alt']"></fa-icon>
+                    {{itemDevice.speed}} KM(H)
+                  </label>
+                  <br>
+                  <label class="labelItem">
+                    <fa-icon class="labelIcon" [icon]="['fas','clock']"></fa-icon>
+                    {{itemDevice.dateTime}}
+                  </label>
+                  <br>
+                  <label class="labelItem">
+                    <fa-icon class="labelIcon" [icon]="['fas','map-marker-alt']"></fa-icon>
+                    {{itemDevice.address}}
+                  </label>
+                </div>
+              </div>
+            </agm-info-window>
+          </agm-marker>
+
+
+          <agm-polygon [paths]="pathsPolygon">
+          </agm-polygon>
+        </ng-container>
+      </ng-container>
+    </agm-marker-cluster>
+  </agm-map>
+</div>

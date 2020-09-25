@@ -2,37 +2,37 @@
   <div class="row">
     <div class="col-md-2">
       <ul class="list-group">
-        <li class="list-group-item" [ngClass]="{ 'active-item' : itemMenuSelected === 1}" (click)="selectInMenu(1)">
+        <li class="list-group-item" [ngClass]="{ 'active-item' : itemMenuSelected === 0}" (click)="selectInMenu(0)">
           Unidades
         </li>
-        <li class="list-group-item" [ngClass]="{ 'active-item' : itemMenuSelected === 2}" (click)="selectInMenu(2)">
+        <li class="list-group-item" [ngClass]="{ 'active-item' : itemMenuSelected === 1}" (click)="selectInMenu(1)">
           Dispositivos
         </li>
-        <li class="list-group-item" [ngClass]="{ 'active-item' : itemMenuSelected === 3}" (click)="selectInMenu(3)">
+        <li class="list-group-item" [ngClass]="{ 'active-item' : itemMenuSelected === 2}" (click)="selectInMenu(2)">
           Usuarios
         </li>
-        <li class="list-group-item" [ngClass]="{ 'active-item' : itemMenuSelected === 4}" (click)="selectInMenu(4)">
+        <li class="list-group-item" [ngClass]="{ 'active-item' : itemMenuSelected === 3}" (click)="selectInMenu(3)">
           Roles
         </li>
       </ul>
     </div>
     <div class="col-md-10">
-      <ng-container *ngIf="itemMenuSelected === 1">
+      <ng-container *ngIf="itemMenuSelected === 0">
         <div class="containerDiv">
           <app-units></app-units>
         </div>
       </ng-container>
-      <ng-container *ngIf="itemMenuSelected === 2">
+      <ng-container *ngIf="itemMenuSelected === 1">
         <div class="containerDiv">
           <app-devices></app-devices>
         </div>
       </ng-container>
-      <ng-container *ngIf="itemMenuSelected === 3">
+      <ng-container *ngIf="itemMenuSelected === 2">
         <div class="containerDiv">
           <app-users></app-users>
         </div>
       </ng-container>
-      <ng-container *ngIf="itemMenuSelected === 4">
+      <ng-container *ngIf="itemMenuSelected === 3">
         <div class="containerDiv">
           <app-roles></app-roles>
         </div>

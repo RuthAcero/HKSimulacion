@@ -1,74 +1,67 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
-import { MyGeotabService } from 'src/app/services/MyGeotab/my-geotab.service';
-import { ShareService } from 'src/app/services/Share/share.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
-import { DataService } from 'src/app/services/Data/data.service';
 import { Constants } from 'src/app/Constants';
+import { DataService } from 'src/app/services/Data/data.service';
+import { EventsService } from 'src/app/services/Events/events.service';
+import { ShareService } from 'src/app/services/Share/share.service';
 import * as _ from 'lodash';
 import * as moment from 'moment';
-import { EventsService } from 'src/app/services/Events/events.service';
 
 @Component({
-  selector: 'app-monitoring',
-  templateUrl: './monitoring.component.html',
-  styleUrls: ['./monitoring.component.scss']
+  selector: 'app-device-info',
+  templateUrl: './device-info.component.html',
+  styleUrls: ['./device-info.component.scss']
 })
-export class MonitoringComponent implements OnInit, OnDestroy {
-  @Output() out = new EventEmitter();
-  @Input() typeMap;
-  activeSlidebar = false;
-  textLoader = '';
-  lstAllDevices = [];
-  lstDevicesSelect = [];
+export class DeviceInfoComponent implements OnInit, OnDestroy {
   lstDevicesList = [];
-  heightContainer = 0;
-  itemsMenu = [
-    { label: 'Crear', icon: 'pi pi-fw pi-plus' },
-    { label: 'Mostrar', icon: 'pi pi-fw pi-download' },
-  ];
-  imgIcon = 'assets/bus_monitoring.png';
+  textLoader = '';
+  heightContainer;
   intervalPet;
-  seeTableDevices = true;
-  isFirst = true;
 
   constructor(
-    private shareService: ShareService,
-    private goeotabService: MyGeotabService,
+    private eventsService: EventsService,
     private dataService: DataService,
-    private eventService: EventsService,
-    private ngxLoader: NgxUiLoaderService,
-  ) { }
+    private shareService: ShareService,
+    private ngxLoader: NgxUiLoaderService
+  ) {
 
-
-  ngOnInit() {
-    this.seeTableDevices = window.innerWidth > 600;
-    this.getHeightContent(window.innerHeight);
-    this.textLoader = 'Cargando...';
-    this.ngxLoader.startLoader('loader-monitoring');
   }
 
+  ngOnInit() {
+    this.getHeightContent(window.innerHeight);
+    this.eventsService.varDeviceSelectInfoList = this.eventsService.
+      invokeDeviceSelect.subscribe((item) => {
+        console.log(item);
+        if (!item.latitude) {
+          this.shareService.showInfoToastAutoClose(`No se encontró posición para dispositivo "${item.name}"`)
+          return;
+        }
+        if (item.latitude !== 0 && item.longitude !== 0) {
+
+        } else {
+          this.shareService.showInfoToastAutoClose(`No se encontró posición para dispositivo "${item.name}"`)
+        }
+      });
+  }
+
+
   ngOnDestroy() {
+    this.eventsService.varDeviceSelectInfoList.unsubscribe();
     clearInterval(this.intervalPet);
   }
 
   async getListFilter(data) {
-    if (this.isFirst) {
-      this.textLoader = 'Cargando...';
-      this.ngxLoader.startLoader('loader-monitoring');
-    }
 
+    this.textLoader = 'Cargando...';
+    this.ngxLoader.startLoader('loader-list-devices-update')
     clearInterval(this.intervalPet);
     await this.getLastPosition(data);
-
-
-    if (this.isFirst) {
-      this.ngxLoader.stopLoader('loader-monitoring');
-      this.isFirst = false;
-    }
+    this.ngxLoader.stopLoader('loader-list-devices-update')
 
     this.intervalPet = setInterval(() => {
       this.getLastPosition(data);
     }, 30000);
+
   }
 
   async getLastPosition(dataDevices) {
@@ -120,33 +113,22 @@ export class MonitoringComponent implements OnInit, OnDestroy {
       }
 
       this.lstDevicesList = auxData;
-      this.eventService.activeDevicesList(auxData);
     } catch (error) {
       console.log(error);
       this.shareService.showErrorToast(error);
     }
   }
 
+
   onResize(event) {
     this.getHeightContent(event.target.innerHeight);
-    this.seeTableDevices = event.target.innerWidth > 600;
 
   }
 
-
   getHeightContent(height) {
-    const tam = height < 700 ? 12.8 : 12;
+    const tam = height < 700 ? 38 : 28;
     const percent = (height * tam) / 100;
     this.heightContainer = height - percent;
   }
 
-
-  selectedList() {
-    this.out.emit({})
-  }
-
-
 }
-
-
-

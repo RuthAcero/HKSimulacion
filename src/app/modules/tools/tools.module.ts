@@ -17,6 +17,12 @@ import { CalendarModule } from 'primeng/calendar';
 import { CheckboxModule } from 'primeng/checkbox';
 import { MenuModule } from 'primeng/menu';
 
+// Maps Modules
+import { AgmCoreModule } from '@agm/core';
+import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
+import { environment } from 'src/environments/environment';
+
+
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   bgsColor: '#red',
   fgsColor: '#006492',
@@ -44,6 +50,11 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     MenuModule,
     NgxPaginationModule,
     FilterPipeModule,
+    AgmCoreModule.forRoot({
+      apiKey: environment.map,
+      libraries: ['places', 'geometry']
+    }),
+    AgmJsMarkerClustererModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
@@ -66,7 +77,9 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     CheckboxModule,
     NgxPaginationModule,
     FilterPipeModule,
-    ScrollingModule
+    ScrollingModule,
+    AgmCoreModule,
+    AgmJsMarkerClustererModule,
   ]
 })
 export class ToolsModule { }

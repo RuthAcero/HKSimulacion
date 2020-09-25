@@ -1,0 +1,14 @@
+<div id="appDeviceInfo" ngxUiLoaderBlurred blur="10" (window:resize)="onResize($event)">
+  <div class="containerMenu">
+    <app-main-filter (outPutList)="getListFilter($event)"></app-main-filter>
+  </div>
+  <div class="containerTable">
+    <ngx-ui-loader [loaderId]="'loader-list-devices-update'" [text]="textLoader"></ngx-ui-loader>
+    <ng-container *ngIf="lstDevicesList.length">
+      <h4 class="tittle"> Vehículos registrados: </h4>
+      <app-table-devices [heightContent]="heightContainer" [devices]="lstDevicesList"></app-table-devices>
+    </ng-container>
+  </div>
+</div>
+
+<ngx-ui-loader [loaderId]="'loader-list-devices'"  [text]="textLoader"></ngx-ui-loader>

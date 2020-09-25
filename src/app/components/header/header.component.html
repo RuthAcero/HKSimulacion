@@ -13,16 +13,21 @@
         <ul class="navbar-nav">
           <li class="nav-item">
             <button class="buttonNav" [ngClass]="{ 'active' : itemMenuSelected === 0}" (click)="selectInMenu(0)">
+              <fa-icon class="iconMen" style="font-size: 1.1rem; margin-right: 4px;" [icon]="['fas','satellite-dish']">
+              </fa-icon>
               Monitoreo
             </button>
           </li>
           <li class="nav-item">
             <button class="buttonNav" [ngClass]="{ 'active' : itemMenuSelected === 1}" (click)="selectInMenu(1)">
+              <fa-icon class="iconMen" style="font-size: 1.1rem;  margin-right: 4px;" [icon]="['fas','file-alt']">
+              </fa-icon>
               Reportes
             </button>
           </li>
           <li class="nav-item">
             <button class="buttonNav" [ngClass]="{ 'active' : itemMenuSelected === 2}" (click)="selectInMenu(2)">
+              <fa-icon class="iconMen" style="font-size: 1.1rem;  margin-right: 4px;" [icon]="['fas','cog']"></fa-icon>
               Configuraciones
             </button>
           </li>

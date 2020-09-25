@@ -37,15 +37,31 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.init();
+    this.getSessionActive();
   }
 
-  async init() {
+
+  async getSessionActive() {
     try {
       this.ngxLoader.startLoader('loader-init');
       const result: any = await this.geotabService.initGeotab();
-      const login: any = await this.loginService.login(result.user);
-      const loginData = login.data[0];
+      const storageData: any = this.loginService.getSession();
+      const data = storageData !== null && storageData !== undefined ? storageData : null;
+      const user = result.user;
+
+      if (data === null) {
+        this.init();
+        return;
+      }
+      const dataSend = JSON.parse(data);
+
+      if (dataSend.userName !== user.userName) {
+        this.init();
+        return;
+      }
+
+      let login: any = await this.loginService.getSessionStorage();
+      login = login.result;
 
       if (!login.status) {
         this.textFailed = this.shareService.processMessage(login.result.message);
@@ -53,8 +69,7 @@ export class AppComponent implements OnInit {
         this.seeError = true;
         return;
       }
-
-      this.loginService.setSession(login.token);
+      const loginData = login.data[0];
       const modules: any = await this.roleService.getModules();
       const roles: any = await this.roleService.getRoles();
       const timeZones: any = await this.userService.getTimeZones();
@@ -80,8 +95,60 @@ export class AppComponent implements OnInit {
       this.shareService.setRoles(roles);
       this.shareService.setTimeZones(timeZones);
       this.shareService.setPermissions(permissions);
-      this.shareService.setDevicesST(devicesST);
-      this.shareService.setVehicles(vehicles);
+      this.shareService.setDevicesST(devicesST !== null ? devicesST : []);
+      this.shareService.setVehicles(vehicles !== null ? vehicles : []);
+      this.seeApp = true;
+      this.ngxLoader.stopLoader('loader-init');
+      this.subscribeToChanges();
+
+    } catch (error) {
+      console.log(error);
+      this.init();
+    }
+  }
+
+  async init() {
+    try {
+      const result: any = await this.geotabService.initGeotab();
+      const login: any = await this.loginService.login(result.user);
+
+      if (!login.status) {
+        this.textFailed = this.shareService.processMessage(login.message);
+        this.ngxLoader.stopLoader('loader-init');
+        this.seeError = true;
+        return;
+      }
+
+      const loginData = login.data[0];
+      this.loginService.setSessionStorage({ userName: result.user.name, tokenApi: login.token });
+      const modules: any = await this.roleService.getModules();
+      const roles: any = await this.roleService.getRoles();
+      const timeZones: any = await this.userService.getTimeZones();
+      const allUsers: any = await this.userService.getAlllUsersData();
+
+      const devicesST: any = await this.deviceService.getDevicesST();
+      const vehicles: any = await this.vehicleService.getDevicesGO();
+
+      const permissions: any = [];
+      const findTimeZone = timeZones.findIndex(e => e.timezoneId === loginData.timezoneId);
+      const findRole = roles.findIndex(e => e.rolesId === loginData.rolesId);
+      loginData.timeZone = timeZones[findTimeZone];
+      loginData.role = roles[findRole];
+
+      const finstUs = _.findIndex(allUsers, e => e.userId === loginData.userId);
+      allUsers.splice(finstUs, 1);
+
+      this.shareService.setUser(loginData);
+      this.shareService.setUsersList(allUsers);
+      this.shareService.setGeotabUser(result.user);
+      this.shareService.setGeotabUsersList(result.users);
+      this.shareService.setModules(modules);
+      this.shareService.setRoles(roles);
+      this.shareService.setTimeZones(timeZones);
+      this.shareService.setPermissions(permissions);
+      console.log(devicesST, vehicles);
+      this.shareService.setDevicesST(devicesST !== null ? devicesST : []);
+      this.shareService.setVehicles(vehicles !== null ? vehicles : []);
       this.seeApp = true;
       this.ngxLoader.stopLoader('loader-init');
       this.subscribeToChanges();
@@ -89,7 +156,6 @@ export class AppComponent implements OnInit {
     } catch (error) {
       console.log(error);
       this.textFailed = this.shareService.processMessage(error);
-      console.log(this.shareService.processMessage(error))
       this.ngxLoader.stopLoader('loader-init');
       this.seeError = true;
     }

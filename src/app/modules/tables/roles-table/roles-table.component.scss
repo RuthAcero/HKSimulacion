@@ -12,7 +12,6 @@
         color: red;
     }
 
-
     .tableContainer {
         margin-top: 10px;
         table {
@@ -24,7 +23,9 @@
             color: rgb(255, 255, 255);
             border: none;
             font-weight: 800;
-
+            padding-top: 7px;
+            padding-bottom: 7px;
+            
             &:hover {
                 cursor: default;
                 -webkit-touch-callout: none; /* iOS Safari */
@@ -40,7 +41,7 @@
             border: none;
             border-bottom: 1px solid rgba(84, 84, 85, 0.1);
             //      background: #003756;
-            background: #003756;
+            background: #1179b6;
         }
     }
 
@@ -74,7 +75,7 @@
     color: #ffffff !important;
 }
 
-::ng-ddep .ui-chkbox{
+::ng-ddep .ui-chkbox {
     border: 1px solid #a69999 !important;
     background-color: #ffffffbd !important;
 }

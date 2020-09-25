@@ -3,6 +3,7 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { MyGeotabService } from 'src/app/services/MyGeotab/my-geotab.service';
 import { ShareService } from 'src/app/services/Share/share.service';
 import * as _ from 'lodash';
+import { EventsService } from 'src/app/services/Events/events.service';
 
 @Component({
   selector: 'app-main-filter',
@@ -11,17 +12,16 @@ import * as _ from 'lodash';
 })
 export class MainFilterComponent implements OnInit {
   @Output() outPutList = new EventEmitter();
+  @Output() menuOption = new EventEmitter();
+
   lstAllDevices = [];
   lstDevicesSelect = [];
   lstDevicesList = [];
-  itemsMenu = [
-    { label: 'Crear', icon: 'pi pi-fw pi-plus' },
-    { label: 'Mostrar', icon: 'pi pi-fw pi-download' },
-  ];
+  itemsMenu;
   imgIcon = 'assets/bus_monitoring.png';
 
   textLoader = '';
-  photosBuffer = [];
+  itemsBuffer = [];
   bufferSize = 50;
   numberOfItemsFromEndBeforeFetchingMore = 10;
   loading = false;
@@ -29,17 +29,32 @@ export class MainFilterComponent implements OnInit {
   constructor(
     private shareService: ShareService,
     private goeotabService: MyGeotabService,
+    private eventService: EventsService,
     private ngxLoader: NgxUiLoaderService
   ) { }
 
   ngOnInit() {
     this.initData();
+
+    this.itemsMenu = [
+      {
+        label: 'Mostrar', icon: 'pi pi-fw pi-eye', command: () => {
+          this.selectedMenuItem(0, 1);
+        }
+      },
+      /*{
+        label: 'Crear', icon: 'pi pi-fw pi-download', command: () => {
+          this.selectedMenuItem(0, 2);
+        }
+      },*/
+    ];
   }
 
+  selectedMenuItem(num, type) {
+    this.eventService.activeOptionSelected({ num: num, type: type });
+  }
 
   async initData() {
-    this.textLoader = 'Cargando...';
-    this.ngxLoader.startLoader('loader-monitoring');
 
     const vehicle = this.shareService.getVehicles(), devices = this.shareService.getDevicesST(),
       goDevices: any = await this.goeotabService.getDevices(), auxItems = [], devicesInList = [];
@@ -73,9 +88,6 @@ export class MainFilterComponent implements OnInit {
     this.lstAllDevices = devA
     this.lstDevicesList = devA
     this.outPutList.emit(devA);
-
-    this.ngxLoader.stopLoader('loader-monitoring');
-
   }
 
   suntechsDis(devices, devicesAux) {
@@ -103,31 +115,31 @@ export class MainFilterComponent implements OnInit {
 
   onScroll({ end }) {
 
-    if (this.loading || this.lstAllDevices.length <= this.photosBuffer.length) {
+    if (this.loading || this.lstAllDevices.length <= this.itemsBuffer.length) {
       return;
     }
 
-    if (end + this.numberOfItemsFromEndBeforeFetchingMore >= this.photosBuffer.length) {
+    if (end + this.numberOfItemsFromEndBeforeFetchingMore >= this.itemsBuffer.length) {
       this.fetchMore();
     }
 
   }
 
   fetchMore() {
-    const len = this.photosBuffer.length;
+    const len = this.itemsBuffer.length;
     const more = this.lstAllDevices.slice(len, this.bufferSize + len);
     this.loading = true;
     // using timeout here to simulate backend API delay
     setTimeout(() => {
       this.loading = false;
-      this.photosBuffer = this.photosBuffer.concat(more);
+      this.itemsBuffer = this.itemsBuffer.concat(more);
     }, 200)
   }
 
   fetchMoreA() {
-    const len = this.photosBuffer.length;
+    const len = this.itemsBuffer.length;
     const more = this.lstAllDevices.slice(len, this.bufferSize + len);
-    this.photosBuffer = this.photosBuffer.concat(more);
+    this.itemsBuffer = this.itemsBuffer.concat(more);
     // using timeout here to simulate backend API delay
     setTimeout(() => {
       this.loading = false;

@@ -13,9 +13,11 @@ export class InterceptorService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     const authToken = window.localStorage.getItem('APPSecurityToken');
+    const dataSend = JSON.parse(authToken);
+
     if (authToken) {
       req = req.clone({
-        headers: req.headers.set('token', authToken),
+        headers: req.headers.set('token', dataSend.tokenApi),
       });
     }
     return next.handle(req);

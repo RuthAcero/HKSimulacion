@@ -1,33 +1,61 @@
 <div id="appTableDevices">
   <div class="tableContainer">
-    <table class="table">
+    <table class="table table-striped">
       <thead>
         <tr>
           <th> Económico </th>
+          <!-- 
           <th> Conductor </th>
+           -->
           <th> VIN / IMEI</th>
           <th> Placa </th>
-          <th> TIPO </th>
+          <th> Tipo </th>
           <th> Dirección </th>
           <th> Estado </th>
+          <!-- 
           <th> Paro de motor </th>
-          <th> --- </th>
+           -->
+          <th> </th>
         </tr>
       </thead>
       <tbody>
-        <cdk-virtual-scroll-viewport [style.height]="150 + 'px'" itemSize="0">
+        <cdk-virtual-scroll-viewport [style.height]="heightContent + 'px'" itemSize="0">
           <ng-container *ngFor="let item of  devices">
             <tr>
-              <td> {{item.name}} </td>
-              <td> {{item.driver}} </td>
-              <td> {{item.vin}} </td>
-              <td> {{item.plate}} </td>
-              <td> {{item.type}} </td>
-              <td> {{item.address}} </td>
-              <td> {{item.status}} </td>
-              <td> {{item.stopMotor}} </td>
-              <td>
-                <fa-icon class="iconMen" [icon]="['fas','info-circle']"></fa-icon><br>
+              <td [attr.data-label]="'Económico'">
+                <label [pTooltip]="item.name" tooltipPosition="right"> {{item.name}}</label>
+              </td>
+              <!-- 
+              <td [attr.data-label]="'Conductor'">
+                <label [pTooltip]="item.driver" tooltipPosition="right"> {{item.driver}}</label>
+              </td>
+               -->
+              <td [attr.data-label]="'VIN'">
+                <label [pTooltip]="item.vin" tooltipPosition="right"> {{item.vin}}</label>
+              </td>
+              <td [attr.data-label]="'Placa'">
+                <label [pTooltip]="item.plate" tooltipPosition="right"> {{item.plate}}</label>
+              </td>
+              <td [attr.data-label]="'Tipo'">
+                <label [pTooltip]="item.type" tooltipPosition="right"> {{item.type}}</label>
+              </td>
+              <td [attr.data-label]="'Dirección'">
+                <label [pTooltip]="item.address" tooltipPosition="right"> {{item.address}} </label>
+              </td>
+              <td [attr.data-label]="'Estatus'">
+                <label [pTooltip]="item.status" tooltipPosition="right"> {{item.status}}</label>
+              </td>
+              <!-- 
+              <td [attr.data-label]="'Paro de motor'">
+                <label [pTooltip]="item.stopMotor" tooltipPosition="right"> {{item.stopMotor}}</label>
+              </td>
+               -->
+              <td [attr.data-label]="'Opciones'">
+                <fa-icon [pTooltip]="'Enfocar'" tooltipPosition="right" (click)="selectedDevice(item)" class="iconMen"
+                  [icon]="['fas','map-marker-alt']"></fa-icon>
+                <!-- 
+                <fa-icon [pTooltip]="'Incidencias'" tooltipPosition="right"  class="iconMen" [icon]="['fas','info-circle']"></fa-icon>
+                 -->
               </td>
             </tr>
           </ng-container>

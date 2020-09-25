@@ -1,15 +1,12 @@
 #appHeader {
     .navAux {
         background: white;
-        -webkit-box-shadow: 0 10px 5px #888888;
-        -moz-box-shadow: 0 10px 5px #888888;
-        box-shadow: 0 10px 5px #888888;
-        box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.25);
-        margin-bottom: 6px;
     }
 
     .navbar {
         background: #003756;
+        background-color: #1070a9;
+        background-image: linear-gradient(to right,#0b4b77,#1179b6 50%,#0b4b77);
         padding: 3px;
     }
 

@@ -36,7 +36,7 @@ export function isNotEmpty(control) {
   declarations: [
     AppComponent,
     ContainerComponent,
-    HeaderComponent
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

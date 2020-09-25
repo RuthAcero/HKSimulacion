@@ -19,8 +19,28 @@ export class LoginService {
     }
   }
 
-  setSession(user) {
-    localStorage.setItem('APPSecurityToken', user);
+  getSession() {
+    return localStorage.getItem('APPSecurityToken');
+  }
+  
+
+
+  setSessionStorage(user) {
+    const userString = JSON.stringify(user);
+    localStorage.setItem('APPSecurityToken', userString);
   }
 
+
+  getSessionStorage() {
+    const data = localStorage.getItem('APPSecurityToken');
+    console.log(data);
+    if (data !== null && data !== undefined) {
+      const dataSend = JSON.parse(data);
+      let headers: HttpHeaders = new HttpHeaders();
+      headers = headers.append('token', dataSend.tokenApi);
+      return this.httpClient.get(`${environment.api}login`, { headers }).toPromise();
+    } else {
+      return null;
+    }
+  }
 }

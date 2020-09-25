@@ -1,0 +1,47 @@
+#windowInfo {
+    width: 400px;
+    height: 170px;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    .headerDevice {
+        width: 100%;
+        text-align: left;
+        padding: 10px;
+        padding-left: 4px;
+    }
+
+    .title {
+        font-size: 1rem;
+        color: rgb(0, 81, 128);
+    }
+
+    .labelItem {
+        //  margin-bottom: 8px;
+        color: black;
+    }
+
+    .labelIcon {
+        color: rgb(0, 81, 128);
+    }
+
+    .iconDriving {
+        color: rgb(0, 170, 23);
+    }
+
+    .iconStop {
+        color: rgb(136, 1, 1);
+    }
+
+    .windowBody {
+        text-align: left;
+        width: 100%;
+        padding: 4px;
+    }
+
+    .subTitle {
+        color: rgb(146, 146, 146);
+    }
+}
+
+

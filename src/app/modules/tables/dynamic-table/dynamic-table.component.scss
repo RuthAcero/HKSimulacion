@@ -36,7 +36,7 @@
             cursor: default;
         }
     }
-    
+
     .tableContainer {
         margin-top: 10px;
         table {
@@ -47,13 +47,15 @@
             color: rgb(255, 255, 255);
             border: none;
             font-weight: 800;
+            padding-top: 8px;
+            padding-bottom: 5px;
         }
 
         thead {
             border: none;
             border-bottom: 1px solid rgba(84, 84, 85, 0.1);
             //      background: #003756;
-            background: #003756;
+            background: #1179b6;
             -webkit-touch-callout: none; /* iOS Safari */
             -webkit-user-select: none; /* Safari */
             -khtml-user-select: none; /* Konqueror HTML */
@@ -160,8 +162,8 @@
         right: 0;
         bottom: 0;
         left: 0;
-        height: 18px;
-        width: 18px;
+        height: 15px;
+        width: 15px;
         transition: all 0.15s ease-out 0s;
         background: #cbd1d8;
         border: none;
@@ -180,14 +182,14 @@
         background: #03ad00;
     }
     .option-input:checked::before {
-        height: 18px;
-        width: 18px;
+        height: 15px;
+        width: 15px;
         position: absolute;
         content: "✔";
         display: inline-block;
-        font-size: 14px;
+        font-size: 12px;
         text-align: center;
-        line-height: 18px;
+        line-height: 15px;
     }
     .option-input:checked::after {
         -webkit-animation: click-wave 0.65s;

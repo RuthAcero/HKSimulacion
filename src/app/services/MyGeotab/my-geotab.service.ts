@@ -113,4 +113,22 @@ export class MyGeotabService {
   }
 
 
+  async getZones() {
+    await this.initApi();
+    return new Promise((res, rej) => {
+      this.apiRef.getSession((cred, db) => {
+        if (cred) {
+          this.apiRef.multiCall([['Get', { typeName: 'Zone' }]], result => {
+            if (result) {
+              res(result[0]);
+            } else {
+              rej([]);
+            }
+          });
+        }
+      });
+    });
+  }
+
+
 }

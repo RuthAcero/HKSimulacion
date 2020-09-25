@@ -3,17 +3,23 @@
 
     .iconMen {
         color: #003756;
+        margin-left: 4px;
     }
-    
+
     .tableContainer {
+        text-align: left;
         table {
             border: 1px solid rgba(84, 84, 85, 0.1);
             margin-bottom: 0px !important;
+            border-bottom: 0px;
+            border: none;
         }
         th {
             color: rgb(255, 255, 255);
             border: none;
             font-weight: 800;
+            padding-top: 7px;
+            padding-bottom: 7px;
         }
 
         thead {
@@ -21,6 +27,8 @@
             border-bottom: 1px solid rgba(84, 84, 85, 0.1);
             //      background: #003756;
             background: #003756;
+            background-color: #1179b6;
+            //background-image: linear-gradient(to right,#0b4b77,#1179b6 50%,#0b4b77);
             -webkit-touch-callout: none; /* iOS Safari */
             -webkit-user-select: none; /* Safari */
             -khtml-user-select: none; /* Konqueror HTML */
@@ -33,7 +41,6 @@
     table thead {
         display: block;
         margin-bottom: 0px !important;
-        text-align: center;
     }
     thead {
         -webkit-touch-callout: none; /* iOS Safari */
@@ -71,5 +78,36 @@
         -moz-user-select: none; /* Old versions of Firefox */
         -ms-user-select: none; /* Internet Explorer/Edge */
         user-select: none;
+    }
+}
+
+@media only screen and (max-width: 600px), (min-width: 600px) and (max-width: 600px) {
+    table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    table tr {
+        border-bottom: 5px solid #ddd;
+        display: block;
+    }
+
+    table td {
+        border-bottom: 1px solid rgb(248, 246, 246);
+        display: block;
+        padding: 0px;
+        text-align: right;
+    }
+
+    table td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        float: left;
     }
 }
