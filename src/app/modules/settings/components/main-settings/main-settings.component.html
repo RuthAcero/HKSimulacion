@@ -1,0 +1,42 @@
+<div id="appMainSettings">
+  <div class="row">
+    <div class="col-md-2">
+      <ul class="list-group">
+        <li class="list-group-item" [ngClass]="{ 'active-item' : itemMenuSelected === 1}" (click)="selectInMenu(1)">
+          Unidades
+        </li>
+        <li class="list-group-item" [ngClass]="{ 'active-item' : itemMenuSelected === 2}" (click)="selectInMenu(2)">
+          Dispositivos
+        </li>
+        <li class="list-group-item" [ngClass]="{ 'active-item' : itemMenuSelected === 3}" (click)="selectInMenu(3)">
+          Usuarios
+        </li>
+        <li class="list-group-item" [ngClass]="{ 'active-item' : itemMenuSelected === 4}" (click)="selectInMenu(4)">
+          Roles
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-10">
+      <ng-container *ngIf="itemMenuSelected === 1">
+        <div class="containerDiv">
+          <app-units></app-units>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="itemMenuSelected === 2">
+        <div class="containerDiv">
+          <app-devices></app-devices>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="itemMenuSelected === 3">
+        <div class="containerDiv">
+          <app-users></app-users>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="itemMenuSelected === 4">
+        <div class="containerDiv">
+          <app-roles></app-roles>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

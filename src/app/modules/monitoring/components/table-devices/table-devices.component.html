@@ -1,0 +1,39 @@
+<div id="appTableDevices">
+  <div class="tableContainer">
+    <table class="table">
+      <thead>
+        <tr>
+          <th> Económico </th>
+          <th> Conductor </th>
+          <th> VIN / IMEI</th>
+          <th> Placa </th>
+          <th> TIPO </th>
+          <th> Dirección </th>
+          <th> Estado </th>
+          <th> Paro de motor </th>
+          <th> --- </th>
+        </tr>
+      </thead>
+      <tbody>
+        <cdk-virtual-scroll-viewport [style.height]="150 + 'px'" itemSize="0">
+          <ng-container *ngFor="let item of  devices">
+            <tr>
+              <td> {{item.name}} </td>
+              <td> {{item.driver}} </td>
+              <td> {{item.vin}} </td>
+              <td> {{item.plate}} </td>
+              <td> {{item.type}} </td>
+              <td> {{item.address}} </td>
+              <td> {{item.status}} </td>
+              <td> {{item.stopMotor}} </td>
+              <td>
+                <fa-icon class="iconMen" [icon]="['fas','info-circle']"></fa-icon><br>
+              </td>
+            </tr>
+          </ng-container>
+        </cdk-virtual-scroll-viewport>
+      </tbody>
+    </table>
+  </div>
+
+</div>

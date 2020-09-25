@@ -1,0 +1,40 @@
+<div id="appTablePermissions">
+  <div class="tableContainer">
+    <table class="table table-striped text-center">
+      <thead>
+        <tr>
+          <ng-container *ngFor="let col of columns">
+            <th> {{col.header}} </th>
+          </ng-container>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let rowData of permissions">
+          <tr>
+            <ng-container *ngFor="let col of columns">
+              <ng-container *ngIf="col.key === 'moduleName'">
+                <td> {{rowData[col.key]}} </td>
+              </ng-container>
+              <ng-container *ngIf="col.key !== 'moduleName'">
+                <td *ngIf="!editable && !create">
+                  <fa-icon *ngIf="rowData[col.key]" class="iconCheck" [icon]="['fas','check']"></fa-icon>
+                  <fa-icon *ngIf="!rowData[col.key]" class="iconBan" [icon]="['fas','ban']"></fa-icon>
+
+                </td>
+                <td *ngIf="editable">
+                  <p-checkbox [(ngModel)]="rowData[col.key]" [binary]="true" (onChange)="changePermissions()">
+                  </p-checkbox>
+                </td>
+                <td *ngIf="create">
+                  <p-checkbox [(ngModel)]="rowData[col.key]" [binary]="true" (onChange)="changePermissions()">
+                  </p-checkbox>
+                </td>
+              </ng-container>
+            </ng-container>
+          </tr>
+        </ng-container>
+
+      </tbody>
+    </table>
+  </div>
+</div>

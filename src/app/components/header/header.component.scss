@@ -1,0 +1,293 @@
+#appHeader {
+    .navAux {
+        background: white;
+        -webkit-box-shadow: 0 10px 5px #888888;
+        -moz-box-shadow: 0 10px 5px #888888;
+        box-shadow: 0 10px 5px #888888;
+        box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.25);
+        margin-bottom: 6px;
+    }
+
+    .navbar {
+        background: #003756;
+        padding: 3px;
+    }
+
+    .space-center {
+        flex: 1 1 auto;
+    }
+
+    .buttonProfile {
+        width: auto;
+        background: transparent;
+        color: white;
+        font-size: 1rem;
+        border: none;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    .titleModule {
+        margin-left: 20px;
+        font-size: 1rem;
+        font-weight: 600;
+        color: rgb(0, 111, 148);
+    }
+
+    .iconMenu {
+        background: transparent;
+        color: #f91942;
+        border: none;
+        width: auto;
+    }
+
+    .activeSidnav {
+        //width: 18.2rem;
+        width: 70%;
+        padding-left: 1%;
+        border-right: 2px solid rgba(162, 162, 162, 0.394);
+    }
+
+    .iconHome {
+        background: transparent;
+        border: none;
+        margin-left: 4px;
+        color: rgb(0, 111, 148);
+        margin-right: 4px;
+        font-size: 1.3rem;
+        margin-top: -5px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .buttonNav {
+        color: rgba(245, 245, 245, 0.476);
+        //background: white;
+        background: none;
+        border: none;
+        border-radius: 30px;
+        padding: 5px 10px 5px 10px;
+        margin-right: 8px;
+        border: none;
+        font-weight: 400;
+
+        &:hover {
+            // background: rgba(253, 110, 136, 0.06);
+            background: none;
+            color: rgba(255, 255, 255, 0.639);
+            //color: #ff2612;
+        }
+    }
+
+    .buttonNavRight {
+        background: transparent;
+        border: none;
+        color: rgb(180, 180, 180);
+        font-size: 0.9rem;
+        padding: 9px 9px 9px 9px;
+        line-height: normal;
+        border-radius: 40px;
+        margin-right: 4px;
+
+        &:hover {
+            cursor: pointer;
+            padding: 9px 9px 9px 9px;
+            color: #f91942;
+        }
+    }
+
+    .active {
+        /*
+        background: rgba(249, 25, 66, 0.06);
+        color: #f91942;
+        border-radius: 40px;
+        */
+
+        //  background: rgba(249, 25, 66, 0.06);
+        background: none;
+        //   color: #ff2612;
+        color: white;
+        &:hover {
+            //  background: rgba(249, 25, 66, 0.06);
+            background: none;
+            color: white;
+            //    color: #ff2612;
+        }
+    }
+
+    .tech-slideshow {
+        padding-top: 15px;
+        height: 22px;
+        overflow: hidden;
+        margin: 0 auto;
+        position: relative;
+        transform: translate3d(0, 0, 0);
+        background: #011b54;
+        color: rgb(255, 255, 255);
+    }
+
+    .tech-slideshow > div {
+        height: 22px;
+        padding-top: 4px;
+        width: max-content;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translate3d(0, 0, 0);
+    }
+    .tech-slideshow .mover-1 {
+        animation: moveSlideshow 60s linear infinite;
+    }
+    .tech-slideshow .mover-2 {
+        opacity: 0;
+        transition: opacity 0.5s ease-out;
+        background-position: 0 -200px;
+        animation: moveSlideshow 15s linear infinite;
+    }
+    .tech-slideshow:hover .mover-2 {
+        opacity: 1;
+    }
+
+    @keyframes moveSlideshow {
+        100% {
+            transform: translateX(-66.6666%);
+        }
+    }
+}
+
+#mySidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 24;
+    //top: 0;
+    background-color: rgb(255, 255, 255);
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding: 0px;
+    border-right: none;
+    box-shadow: 10px 0 5px -2px #888;
+    .title {
+        margin-left: 4px;
+        font-size: 0.8rem;
+        font-weight: 800;
+        color: rgb(122, 122, 122);
+    }
+
+    .subTitle {
+        margin-left: 7px;
+        font-size: 0.7rem;
+        color: rgb(122, 122, 122);
+        margin-bottom: 24px;
+    }
+
+    .header {
+        width: 100%;
+        padding: 8px;
+        width: 100%;
+        text-align: right;
+        background: #b5b3b32e;
+    }
+
+    .buttonClose {
+        background: none;
+        border: none;
+        color: #011b9c;
+        font-weight: 700;
+    }
+
+    .buttonContainer {
+        padding: 8px;
+    }
+
+    .buttonNavI {
+        width: 100%;
+        padding: 8px;
+        margin: 4px 0px 4px 0px;
+        background: white;
+        color: rgb(122, 122, 122);
+        font-weight: 700;
+        border: none;
+        text-align: left;
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+
+    .activeInnav {
+        color: #011b9c;
+        background: rgba(35, 118, 241, 0.11);
+        border-radius: 4px;
+    }
+
+    .labelIcon {
+        margin-right: 10px;
+    }
+}
+
+#profileInfo {
+    font-size: 0.8rem;
+    .title {
+        font-weight: 800;
+        color: rgb(85, 85, 85);
+        max-width: 190px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .subTitle {
+        color: rgb(168, 168, 168);
+        max-width: 190px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .buttonDefault {
+        width: auto;
+        height: auto;
+        line-height: normal;
+        padding: 8px 8px 8px 8px;
+        background: rgb(255, 255, 255);
+        color: rgb(0, 0, 0);
+        margin: 0 4px 0 4px;
+        border: 1px solid rgba(207, 207, 207, 0.486);
+        border-radius: 3px;
+        font-size: 0.8rem;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:disabled {
+            background: rgb(235, 235, 235);
+
+            &:hover {
+                cursor: no-drop;
+            }
+        }
+    }
+}
+
+#modalEditRolUse {
+    ::ng-deep .form-control {
+        &:read-only {
+            background-color: #ffffff !important;
+
+            &:hover {
+                cursor: no-drop;
+            }
+        }
+
+        &:disabled {
+            background-color: #ffffff !important;
+
+            &:hover {
+                cursor: no-drop;
+            }
+        }
+    }
+}

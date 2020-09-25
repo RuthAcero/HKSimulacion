@@ -1,0 +1,20 @@
+<div id="appMonitoring">
+  <div class="contentMap" [ngStyle]="{height: heightContainer + 'px' }">
+    <div class="containerMenu">
+      <app-main-filter (outPutList)="getListFilter($event)"></app-main-filter>
+    </div>
+    <app-map></app-map>
+    <div class="contentList" *ngIf="lstDevicesList.length">
+      <button (click)="activeSlidebar = !activeSlidebar">Activar</button>
+      <div class="content-list-devices" [ngClass]="{'active': activeSlidebar}">
+        <ng-container *ngIf="!activeSlidebar">
+          <app-table-devices [devices]="lstDevicesList"></app-table-devices>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<ngx-ui-loader [loaderId]="'loader-monitoring'" [text]="textLoader"></ngx-ui-loader>

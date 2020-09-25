@@ -1,0 +1,145 @@
+<div id="appUnits">
+  <div class="row">
+    <div class="col-md-6">
+      <!-- 
+     <div class="containerFilter">
+        <span class="inp">
+          <fa-icon class="iconSearch" [icon]="['fas','search']"></fa-icon>
+        </span>
+        <input type="text" class="inputText" [(ngModel)]="textFilter" placeholder="Buscar dispositivo">
+      </div>
+       -->
+
+    </div>
+    <div class="col-md-6 buttonOptions">
+      <button class="buttonDefault" (click)="openCreate()"> Importar de MyGeotab </button>
+
+      <!-- 
+      <button class="buttonDefault" (click)="openCreateGO()"> Crear </button>
+      <p-menu #menu [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'" [popup]="true" [model]="itemsMenu"
+        [appendTo]="'body'" [style]="{width:'140px'}"></p-menu>
+      <button type="button" class="buttonDefault" (click)="menu.toggle($event)">Agregar</button>
+       -->
+
+      <button class="buttonDanger" [disabled]="!lstDataSelect.length" (click)="deleteList(contentDeleteListUser)">
+        Eliminar
+      </button>
+    </div>
+  </div>
+  <ng-container *ngIf="seeTable">
+    <app-dynamic-table [columns]="columns" [data]="data" [editable]="editTable" [selection]="true"
+      [delete]="deleteTable" [exportable]="exportTable" [textFilter]="textFilter"
+      (selectionsData)="selectionList($event)" (itemSelection)="itemSelection($event)">
+    </app-dynamic-table>
+  </ng-container>
+</div>
+
+<ng-template #contentAddDeviceGO let-modal>
+  <div class="modal-body" id="modalAddDeviceGo">
+    <ngx-ui-loader [loaderId]="'loader-go-add'" [text]="textLoader"></ngx-ui-loader>
+    <div class="modalHeader">
+      <div class="closeModal">
+        <fa-icon class="iconClose" [icon]="['fas','times-circle']" (click)="closeModal()"></fa-icon>
+      </div>
+      <h2> {{titleModal}} </h2>
+    </div>
+    <div class="modalBody">
+      <div class="form-group" *ngIf="!isImport">
+        <label> Selección vehículo de MyGeotab</label>
+        <ng-select [items]="lstDevicesGeotab" bindLabel="name" [(ngModel)]="vehicleGeotabSelected"
+          (change)="changeSelected()">
+        </ng-select>
+      </div>
+      <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+    </div>
+    <div class="modalFooter">
+      <button class="buttonDefault" (click)="closeModal()"> Cancelar </button>
+      <button [disabled]="!form.valid" class="buttonDefault" (click)="save()" *ngIf="!isImport">
+        Guardar
+      </button>
+      <button [disabled]="!form.valid" class="buttonDefault" (click)="saveCreateData()" *ngIf="isImport">
+        Crear
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #contentDeleteGO let-modal>
+  <div class="modal-body">
+    <ngx-ui-loader [loaderId]="'loader-go-delete'" [text]="textLoader"></ngx-ui-loader>
+    <div class="modalHeader">
+      <div class="closeModal">
+        <fa-icon class="iconClose" [icon]="['fas','times-circle']" (click)="closeModal()"></fa-icon>
+      </div>
+      <h2> {{titleModal}} </h2>
+    </div>
+    <div class="modalBody">
+      <label> <b>Económico: </b> {{itemSelected?.name}} </label><br>
+      <label> <b>Placa: </b> {{itemSelected?.plate}} </label><br>
+      <label> <b>VIN </b> {{itemSelected?.vin}} </label><br>
+      <label> <b>Número serial: </b> {{itemSelected?.serialNumber}} </label><br>
+      <ng-container *ngIf="itemSelected.device">
+        <label> <b>Dispositivo asociado: </b> </label><br>
+        <ul class="list-group">
+          <li> <label> <b>Económico: </b> {{itemSelected?.device?.name}} </label> </li>
+          <li> <label> <b>IMEI: </b> {{itemSelected?.device?.imei}} </label> </li>
+          <li> <label> <b>IMEI-CUT: </b> {{itemSelected?.device?.imeiCut}} </label> </li>
+          <li> <label> <b>PLACA: </b> {{itemSelected?.device?.plate}} </label> </li>
+        </ul>
+      </ng-container>
+    </div>
+    <div class="modalFooter">
+      <button class="buttonDefault" (click)="closeModal()"> Cancelar </button>
+      <button class="buttonDefault" (click)="deleteData()"> Aceptar </button>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #contentDeleteListGO let-modal>
+  <div class="modal-body" id="modalDeleteUsers">
+    <ngx-ui-loader [loaderId]="'loader-user-delete-st'" [text]="textLoader"></ngx-ui-loader>
+    <div class="modalHeader">
+      <div class="closeModal">
+        <fa-icon class="iconClose" [icon]="['fas','times-circle']" (click)="closeModal()"></fa-icon>
+      </div>
+      <h2 *ngIf="!seeResultDelete"> {{titleModal}} </h2>
+    </div>
+    <div class="modalBody">
+      <ng-container *ngIf="!seeResultDelete">
+        <ng-container *ngFor="let item of lstDataSelect">
+          <br>
+          <div class="row itemRow">
+            <div class="col-md-6">
+              <label> <b>Económico: </b> {{item?.name}} </label><br>
+              <label> <b>Placa: </b> {{item?.plate}} </label><br>
+              <label> <b>VIN </b> {{item?.vin}} </label><br>
+              <label> <b>Número serial: </b> {{item?.serialNumber}} </label><br>
+            </div>
+            <div class="col-md-6">
+              <label *ngIf="!item.device"> <b>Dispositivo asociado: </b> sin dispositivo </label><br>
+              <ng-container *ngIf="item.device">
+                <label> <b>Dispositivo asociado: </b> </label><br>
+                <ul class="list-group">
+                  <li> <label> <b>Económico: </b> {{item?.device?.name}} </label> </li>
+                  <li> <label> <b>IMEI: </b> {{item?.device?.imei}} </label> </li>
+                  <li> <label> <b>IMEI-CUT: </b> {{item?.device?.imeiCut}} </label> </li>
+                  <li> <label> <b>PLACA: </b> {{item?.device?.plate}} </label> </li>
+                </ul>
+              </ng-container>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+      <ng-container *ngIf="seeResultDelete">
+        <app-result-list [dataSuccess]="dataDeleteSuccess" [dataFailed]="dataDeleteFailed"></app-result-list>
+      </ng-container>
+    </div>
+    <div class="modalFooter">
+      <button class="buttonDefault" (click)="closeModal()"> Cancelar </button>
+      <button *ngIf="!seeResultDelete" class="buttonDefault" (click)="deleteDataList()"> Aceptar </button>
+    </div>
+  </div>
+</ng-template>
+
+<ngx-ui-loader [loaderId]="'loader-units'" [text]="textLoader"></ngx-ui-loader>

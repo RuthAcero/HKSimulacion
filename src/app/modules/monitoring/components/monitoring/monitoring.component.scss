@@ -1,0 +1,47 @@
+#appMonitoring {
+    width: 100%;
+    text-align: center;
+
+    .contentMap {
+        width: 100%;
+        height: 400px;
+        position: relative;
+        border-bottom: 1px solid;
+    }
+
+    .containerMenu {
+        width: 525px;
+        position: absolute;
+        top: 10px;
+        border: 1px solid rgba(113, 113, 113, 0.347);
+        border-radius: 4px;
+        background: white;
+        padding: 10px;
+        margin-left: 10px;
+
+        .row {
+            width: 100%;
+        }
+    }
+
+
+
+    .contentList {
+        width: 90%;
+        position: absolute;
+        bottom: 0px;
+        left: 4%;
+    }
+
+    .content-list-devices {
+        border: 1px solid;
+        height: 200px;
+    }
+
+    .active {
+        height: 0px;
+    }
+
+ 
+}
+

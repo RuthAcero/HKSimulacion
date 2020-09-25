@@ -1,0 +1,22 @@
+<div id="appResultList" class="row">
+  <div class="col-md-6">
+    <h4 class="title"> Correctos: </h4>
+    <div class="containerResult">
+      <ng-container *ngFor="let item of dataSuccess">
+        <div class="contentText">
+          <label class="text"> {{item.message}} </label>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h4 class="title"> Fallidos: </h4>
+    <div class="containerResult">
+      <ng-container *ngFor="let item of dataFailed">
+        <div class="contentText">
+          <label class="text"> {{item.message}} </label>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

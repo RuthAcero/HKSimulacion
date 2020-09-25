@@ -1,0 +1,26 @@
+#appResultList {
+    width: 100%;
+
+    .title {
+        color: #006492;
+    }
+
+    .containerResult {
+        width: 100%;
+        border: 1px solid rgba(172, 172, 172, 0.626);
+        height: 200px;
+        max-height: 200px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .contentText {
+        width: 100%;
+        padding: 8px 4px 8px 4px;
+        border-bottom: 1px solid rgba(104, 104, 105, 0.251);
+    }
+
+    .text {
+        color: black;
+    }
+}

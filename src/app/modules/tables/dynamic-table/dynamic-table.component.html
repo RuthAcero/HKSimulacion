@@ -1,0 +1,145 @@
+<div id="appTableDynamic">
+  <div class="tableContainer">
+    <div class="rowInfoData">
+      <ng-select class="customSelect" bindLabel="label" [items]="numItemsLIst" [(ngModel)]="numItems"
+        [clearable]="false" [searchable]="false">
+      </ng-select>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+        <thead style="text-align: center;">
+          <tr>
+            <th class="dCheck" *ngIf="selection">
+              <label>
+                <input type="checkbox" (change)="selectedAll($event.target.checked)" class="option-input radio" />
+              </label>
+            </th>
+            <ng-container *ngFor="let col of columns">
+              <th> {{col.header}} </th>
+            </ng-container>
+            <th class="dCheck" style="text-align: center;" *ngIf="editable || delete">
+              Opciones
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="rowFilter">
+            <td class="dCheck" style="padding: 0px; " *ngIf="selection"> </td>
+            <ng-container *ngFor="let col of columns">
+              <td style="padding: 0px;">
+                <div class="containerFilter">
+                  <span class="inp">
+                    <fa-icon class="iconSearch" [icon]="['fas','search']"></fa-icon>
+                  </span>
+                  <input type="text" class="inputText" [(ngModel)]="filterSearch[col.key]"
+                    [placeholder]="col.placeholder">
+                </div>
+              </td>
+            </ng-container>
+            <td class="dCheck" style="padding: 0px;" *ngIf="editable || delete"> </td>
+          </tr>
+          <ng-container
+            *ngFor="let rowData of data | filterBy : filterSearch | paginate: { id: 'filMdvr', itemsPerPage: numItems.value, currentPage: p }">
+
+            <tr>
+              <td class="dCheck" *ngIf="selection">
+                <label>
+                  <input type="checkbox" (change)="checkSelect(rowData, $event.target.checked)"
+                    [(ngModel)]="rowData.selected" class="option-input radio" />
+                </label>
+              </td>
+              <ng-container *ngFor="let col of columns">
+                <ng-container *ngIf="col.key === 'groups'">
+                  <td [attr.data-label]="col.header" (click)="selectedGroups(rowData[col.key])">
+                    <img [src]="imgGrp" width="13" height="13" alt="">
+                    <label style="width: fit-content; margin: 0px; margin-left: 4px;">
+                      {{rowData[col.key]?.length}}
+                    </label>
+                  </td>
+                </ng-container>
+                <ng-container *ngIf="col.key === 'deviceName'">
+                  <td *ngIf="rowData[col.key]" [attr.data-label]="col.header"
+                    (click)="selectedDevice(rowData.device)">
+                    <fa-icon class="labelDelete" [icon]="['fas','location-arrow']"></fa-icon>
+                    {{rowData[col.key]}}
+                  </td>
+                  <td *ngIf="!rowData[col.key]" [attr.data-label]=" col.header">
+                    SIN ASIGNACIÓN
+                  </td>
+                </ng-container>
+                <ng-container *ngIf="col.key !== 'deviceName' && col.key !== 'rules' && col.key !== 'groups'">
+                  <td [attr.data-label]="col.header">
+                    <ng-container *ngIf="col.key !== 'isEmail' && col.key !== 'isPopup' && col.key !== 'isPublic'">
+                      <label style="width: fit-content; margin: 0px;" [pTooltip]="rowData[col.key]"
+                        tooltipPosition="top">
+                        {{rowData[col.key]}}
+                      </label>
+                    </ng-container>
+                  </td>
+                </ng-container>
+              </ng-container>
+              <td class="dCheck" style="text-align: center;" *ngIf="editable || delete">
+                <label *ngIf="editable" (click)="itemSel(rowData, 1)">
+                  <fa-icon class="labelEdit" [icon]="['fas','pen-alt']"></fa-icon>
+                </label>
+                <label *ngIf="delete" (click)="itemSel(rowData, 2)">
+                  <fa-icon class="labelDelete" [icon]="['fas','trash-alt']"></fa-icon>
+                </label>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="footerTable">
+    <div class="row rowInfo">
+      <div class="col-md-4">
+        <ng-select class="customSelect" bindLabel="label" [items]="numItemsLIst" [(ngModel)]="numItems"
+          [clearable]="false" [searchable]="false">
+        </ng-select>
+      </div>
+      <div class="col-md-4 colPaginator">
+        <pagination-controls id="filMdvr" (pageChange)="p = $event" previousLabel="<" nextLabel=">">
+        </pagination-controls>
+      </div>
+      <div class="col-md-4" style="text-align: right;">
+        <button *ngIf="exportable" class="buttonDefault" (click)="eventExport()" style="margin-right: 8px;"> Exportar
+        </button>
+      </div>
+    </div>
+    <div class="rowInfoData">
+      <pagination-controls id="filMdvr" responsive="true" (pageChange)="p = $event" previousLabel="<" nextLabel=">">
+      </pagination-controls><br>
+      <button *ngIf="exportable" class="buttonDefault" style="width: 100%;" (click)="eventExport()">Exportar </button>
+    </div>
+  </div>
+</div>
+
+<p-dialog [header]="titleDialog" [(visible)]="seeDialog" [style]="{width: '280px'}">
+  <div id="dialogDatas" style="width: 100%;">
+    <ng-container *ngIf="areDevice">
+      <div class="containerItems">
+        <label> <b> Económico: </b> {{itemDataDialog.name}} </label><br>
+        <label> <b> IMEI: </b> {{itemDataDialog.imei}} </label><br>
+        <label> <b> IMEI-CUT: </b> {{itemDataDialog.imeiCut}} </label><br>
+        <label> <b> Placa: </b> {{itemDataDialog.plate}} </label><br>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="areGroups || areRules">
+      <ng-container *ngFor="let itemData of itemsSelectedDialog">
+        <ng-container *ngIf="areGroups">
+          <div class="containerItems">
+            <label> <b> Nombre: </b> {{itemData.name}} </label><br>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="areRules">
+          <div class="containerItems">
+            <label> <b> Nombre: </b> {{itemDataDialog.ruleName}} </label><br>
+            <label style="color: rgba(179, 179, 179, 0.891);">Alarma: {{itemDataDialog.alarmName}} </label> </div>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+
+  </div>
+</p-dialog>

@@ -1,0 +1,77 @@
+#appMainFilter {
+    .iconMen {
+        font-size: 1rem;
+    }
+
+    .containerButton {
+        width: auto;
+        margin-left: 14px;
+        font-size: 0.7rem;
+
+        .dropdown-toggle::after {
+            display: none;
+        }
+
+        label {
+            margin-top: 4px;
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .buttonItem {
+        padding: 10px;
+        background: orange;
+        color: #003756;
+        border: 1px solid #003756;
+        border-radius: 30px;
+        width: 50px;
+        height: 50px;
+    }
+    
+    ::ng-deep ng-select .ng-dropdown-panel .ng-dropdown-panel-items {
+        height: 280px !important;
+        max-height: 200px !important;
+        padding-left: 4px !important;
+        padding-right: 4px !important;
+        padding: 6px;
+    }
+}
+
+::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+    padding: 0px !important;
+    padding-left: 3px !important;
+    padding-right: 3px !important;
+    display: contents !important;
+
+    .card {
+        margin: 0px;
+        color: rgb(255, 174, 0);
+        border: 1px solid #28495d4a !important;
+        margin-left: 3px !important;
+        margin-right: 4px !important;
+    }
+
+    .card-body {
+        padding: 7px;
+    }
+
+    .card-subtitle {
+        color: rgb(255, 255, 255);
+    }
+}
+
+::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected,
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked {
+    padding: 0px !important;
+    padding-left: 3px !important;
+    padding-right: 3px !important;
+
+    .card {
+        background-color: #ebf5ff !important;
+        color: rgb(255, 174, 0);
+        border: 1px solid #03395b64 !important;
+    }
+}

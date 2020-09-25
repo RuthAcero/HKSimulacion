@@ -1,0 +1,74 @@
+<div id="appMainFilter">
+  <div class="row">
+    <div class="col-md-7">
+      <ng-select style="width: 280px; margin-top: 10px;" [closeOnSelect]="false" [items]="photosBuffer" bindLabel="name"
+        [multiple]="true" [virtualScroll]="true" [loading]="loading" (scroll)="onScroll($event)" (change)="changeItems()"
+        [(ngModel)]="lstDevicesList" (scrollToEnd)="fetchMoreA(select.filterValue)" #select>
+        <ng-template ng-header-tmp>
+          <button class="buttonDefault" (click)="selectedAllDev(true)"> Seleccionar todo </button>
+          <button class="buttonDefault" (click)="selectedAllDev(false)"> Quitar selección </button>
+        </ng-template>
+        <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+          <div class="ng-value" *ngFor="let item of items | slice:0:1">
+            <span class="ng-value-label"> {{item.name}}</span>
+            <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+          </div>
+          <div class="ng-value" *ngIf="items.length > 1">
+            <span class="ng-value-label">{{items.length - 1}} mas</span>
+          </div>
+        </ng-template>
+        <ng-template ng-option-tmp let-item="item" let-index="index">
+          <div style="margin: 10px 0;" class="card">
+            <div class="card-body" style="text-align: left; padding: 7px;">
+              <div class="row">
+                <div class="col-md-2">
+                  <img [src]="imgIcon" width="35" height="25" alt="">
+                </div>
+                <div class="col-md-10">
+                  <h4 class="card-title">{{item.name}}</h4>
+                  <h5 class="card-subtitle mb-2 text-muted">Vin: {{item.vin}} ({{item.type}})</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </ng-select>
+    </div>
+    <div class="col-md-5" style="display: flex;">
+      <div class="containerButton">
+        <button class="buttonItem">
+          <fa-icon class="iconMen" [icon]="['fas','map-marked']"></fa-icon>
+        </button><br>
+        <label>Mapa</label>
+      </div>
+      <div class="containerButton">
+        <button class="buttonItem">
+          <fa-icon class="iconMen" [icon]="['fas','truck']"></fa-icon>
+        </button><br>
+        <label>Vehículos</label>
+      </div>
+      <div class="containerButton">
+        <p-menu #menu [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'" [popup]="true" [model]="itemsMenu"
+          [appendTo]="'body'" [style]="{width:'140px'}"></p-menu>
+        <button type="button" class="buttonItem" (click)="menu.toggle($event)">
+          <fa-icon class="iconMen" [icon]="['fas','draw-polygon']"></fa-icon><br>
+        </button><br>
+        <label>Zonas</label>
+
+        <!-- 
+<div ngbDropdown class="d-inline-block" placement="right">
+          <button class="buttonItem" ngbDropdownToggle >
+            <fa-icon class="iconMen" [icon]="['fas','draw-polygon']"></fa-icon><br>
+          </button>
+          <label>Zonas</label>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1" >
+            <button ngbDropdownItem>Mostrar zonas</button>
+            <button ngbDropdownItem>Crear zona</button>
+          </div>
+        </div>
+         -->
+
+      </div>
+    </div>
+  </div>
+</div>

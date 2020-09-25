@@ -1,0 +1,64 @@
+<div id="appRoles">
+  <div class="header">
+    <ng-container *ngIf="!create && !editable">
+      <div class="row">
+        <div class="col-md-6">
+          <ng-container>
+            <ng-select class="customCls" [items]="lstRoles" bindLabel="roleName" [searchable]="false"
+              [(ngModel)]="rolSelect" (change)="changeRol()">
+            </ng-select>
+          </ng-container>
+        </div>
+        <div class="col-md-6 text-right">
+          <button class="buttonDefault" *ngIf="!rolSelect && permissionsUser.create" (click)="createRol()">
+            Agregar rol
+          </button>
+          <button class="buttonDefault" *ngIf="rolSelect && permissionsUser.update" (click)="editRole()">
+            Editar
+          </button>
+          <button class="buttonDanger" *ngIf="rolSelect && permissionsUser.delete"
+            (click)="openDelete(contentDeleteRol)">
+            Eliminar
+          </button>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="create || editable">
+      <div class="form-group customForm">
+        <label> Rol: </label>
+        <input type="text" class="form-control" [(ngModel)]="nameRol">
+      </div>
+    </ng-container>
+  </div>
+  <div class="containerTable" *ngIf="rolSelect || create">
+    <app-roles-table *ngIf="seeTable" [columns]="columns" [permissions]="permissions" [editable]="editable"
+      (outPermissions)="changePermissions($event)" [create]="create">
+    </app-roles-table>
+  </div>
+  <div class="footerButtons" *ngIf="create || editable">
+    <button class="buttonDefault" (click)="cancel()"> Cancelar </button>
+    <button class="buttonDefault" (click)="save()"> Guardar </button>
+  </div>
+</div>
+
+
+<ng-template #contentDeleteRol let-modal>
+  <div class="modal-body" id="modalDeleteRol">
+    <ngx-ui-loader [loaderId]="'loader-rol-delete'" [text]="textLoader"></ngx-ui-loader>
+    <div class="modalHeader">
+      <div class="closeModal">
+        <fa-icon class="iconClose" [icon]="['fas','times-circle']" (click)="closeModal()"></fa-icon>
+      </div>
+      <h2> {{titleModal}} </h2>
+    </div>
+    <div class="modalBody">
+      {{rolSelect.name}}
+    </div>
+    <div class="modalFooter">
+      <button class="buttonDefault" (click)="closeModal()"> Cancelar </button>
+      <button class="buttonDefault" (click)="deleteData()"> Aceptar </button>
+    </div>
+  </div>
+</ng-template>
+
+<ngx-ui-loader [loaderId]="'loader-roles'" [text]="textLoader"></ngx-ui-loader>

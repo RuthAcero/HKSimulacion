@@ -1,0 +1,290 @@
+#appTableDynamic {
+    .containerFilter {
+        width: 100%;
+        display: flex;
+    }
+
+    .inp {
+        padding: 8px;
+        text-align: center;
+        border: 1px solid rgba(206, 206, 206, 0.428);
+        //border-right: 1px solid rgba(224, 224, 224, 0.904);
+        // border-bottom-left-radius: 3px;
+        // border-top-left-radius: 3px;
+        background: white;
+        border-right: none;
+        border: none;
+        color: rgb(218, 218, 218);
+    }
+
+    .inputText {
+        padding: 9px;
+        padding-left: 0px;
+        width: 100%;
+        border: 1px solid rgba(206, 206, 206, 0.428);
+        border-left: none;
+        border: none;
+
+        //  border-top-right-radius: 3px;
+        //   border-bottom-right-radius: 3px;
+    }
+
+    .rowFilter {
+        background: #f1f1f1;
+        &:hover {
+            background: #f1f1f1;
+            cursor: default;
+        }
+    }
+    
+    .tableContainer {
+        margin-top: 10px;
+        table {
+            border: 1px solid rgba(84, 84, 85, 0.1);
+            margin-bottom: 0px !important;
+        }
+        th {
+            color: rgb(255, 255, 255);
+            border: none;
+            font-weight: 800;
+        }
+
+        thead {
+            border: none;
+            border-bottom: 1px solid rgba(84, 84, 85, 0.1);
+            //      background: #003756;
+            background: #003756;
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none; /* Safari */
+            -khtml-user-select: none; /* Konqueror HTML */
+            -moz-user-select: none; /* Old versions of Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
+        }
+    }
+
+    table tbody,
+    table thead {
+        display: block;
+        margin-bottom: 0px !important;
+        text-align: center;
+    }
+    thead {
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none;
+    }
+    tbody {
+        tr {
+            &:hover {
+                background: #dbdddf36;
+                cursor: pointer;
+            }
+        }
+        label {
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+    tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    }
+    td {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none;
+    }
+
+    .customSelect {
+        width: 100px;
+        margin-left: 8px;
+    }
+
+    .rowInfoData {
+        display: none;
+        visibility: hidden;
+    }
+
+    .colPaginator {
+        text-align: center;
+        // display: flex;
+        align-items: center;
+        padding-top: 8px;
+    }
+
+    .labelCam {
+        margin-left: 4px;
+        margin-right: 4px;
+        color: #003756;
+    }
+
+    .labelEdit {
+        margin-left: 4px;
+        margin-right: 4px;
+        color: rgb(208, 208, 7);
+    }
+
+    .labelDelete {
+        margin-left: 4px;
+        margin-right: 4px;
+        color: rgb(208, 7, 7);
+    }
+
+    .footerTable {
+        width: 100%;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        text-align: center;
+        border: 1px solid rgba(84, 84, 85, 0.1);
+    }
+
+    .option-input {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -ms-appearance: none;
+        -o-appearance: none;
+        appearance: none;
+        position: relative;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 18px;
+        width: 18px;
+        transition: all 0.15s ease-out 0s;
+        background: #cbd1d8;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        display: inline-block;
+        // margin-right: 0.5rem;
+        outline: none;
+        position: relative;
+        z-index: 1000;
+    }
+    .option-input:hover {
+        background: #9faab7;
+    }
+    .option-input:checked {
+        background: #03ad00;
+    }
+    .option-input:checked::before {
+        height: 18px;
+        width: 18px;
+        position: absolute;
+        content: "✔";
+        display: inline-block;
+        font-size: 14px;
+        text-align: center;
+        line-height: 18px;
+    }
+    .option-input:checked::after {
+        -webkit-animation: click-wave 0.65s;
+        -moz-animation: click-wave 0.65s;
+        animation: click-wave 0.65s;
+        background: #03ad00;
+        content: "";
+        display: block;
+        position: relative;
+        z-index: 100;
+    }
+
+    .dCheck {
+        width: 8%;
+    }
+}
+
+#dialogDatas {
+    width: 200px;
+    max-height: 280px;
+    overflow-y: auto;
+
+    .containerItems {
+        width: 100%;
+        border-bottom: 1px solid rgba(204, 204, 204, 0.51);
+        padding: 4px 4px 6px 0px;
+    }
+}
+
+@media only screen and (max-width: 600px), (min-width: 600px) and (max-width: 600px) {
+    #appTableDynamic {
+        .dCheck {
+            width: 100%;
+        }
+
+        .rowInfo {
+            display: none;
+            visibility: hidden;
+        }
+
+        .rowInfoData {
+            display: block;
+            visibility: visible;
+        }
+
+        .customSelect {
+            width: 70%;
+            margin-bottom: 10px;
+            margin-left: 0px;
+        }
+    }
+    table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    table tr {
+        border-bottom: 5px solid #ddd;
+        display: block;
+    }
+
+    table td {
+        border-bottom: 1px solid rgb(248, 246, 246);
+        display: block;
+        padding: 0px;
+        text-align: right;
+    }
+
+    table td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        float: left;
+    }
+}
+
+::ng-deep .ngx-pagination {
+    margin: 0px !important;
+}
+
+::ng-deep .ngx-pagination .current {
+    padding: 0.3rem 0.4rem !important;
+    background: #003756 !important;
+    color: #fefefe !important;
+    cursor: default !important;
+    border-radius: 71px !important;
+}
+
+::ng-deep .tooltip .ui-tooltip-text {
+    //   width: 100% !important;
+}
+
+::ng-deep .ui-tooltip {
+    max-width: 400px !important;
+}

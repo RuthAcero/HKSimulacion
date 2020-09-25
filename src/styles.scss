@@ -1,0 +1,361 @@
+/* You can add global styles to this file, and also import other style files */
+html {
+    height: -webkit-fill-available;
+}
+body {
+    margin: 0;
+    padding: 0;
+}
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+#app-security {
+    font-size: 0.8rem;
+    font-family: raleway, helveticaneue, helvetica neue, Helvetica, Arial, sans-serif;
+
+    @import "~ngx-toastr/toastr.css";
+    @import "~ngx-toastr/toastr-bs4-alert";
+    @import "~@ng-select/ng-select/themes/default.theme.css";
+
+    @import "node_modules/primeicons/primeicons.css";
+    @import "node_modules/primeng/resources/themes/rhea/theme.css";
+    @import "node_modules/primeng/resources/primeng.min.css";
+
+    @import "@angular/material/prebuilt-themes/deeppurple-amber.css";
+    @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+    @import "~bootstrap/scss/grid";
+    @import "~bootstrap/scss/forms";
+    @import "~bootstrap/scss/custom-forms";
+    @import "~bootstrap/scss/buttons";
+    @import "~bootstrap/scss/button-group";
+    @import "~bootstrap/scss/list-group";
+    @import "~bootstrap/scss/badge";
+    @import "~bootstrap/scss/transitions";
+    @import "~bootstrap/scss/nav";
+    @import "~bootstrap/scss/utilities";
+    @import "~bootstrap/scss/card";
+    @import "~bootstrap/scss/tooltip";
+    @import "~bootstrap/scss/dropdown";
+    @import "~bootstrap/scss/alert";
+    @import "~bootstrap/scss/tables";
+    @import "~bootstrap/scss/carousel";
+    @import "~bootstrap/scss/pagination";
+    @import "~bootstrap/scss/progress";
+    @import "~bootstrap/scss/navbar";
+    @import "~bootstrap/scss/popover";
+    @import "~bootstrap/scss/modal";
+    @import "~bootstrap/scss/media";
+    @import "~bootstrap/scss/reboot";
+
+    textarea:hover,
+    input:hover,
+    textarea:active,
+    input:active,
+    textarea:focus,
+    input:focus,
+    button:focus,
+    button:active,
+    button:hover,
+    label:focus,
+    .btn:active,
+    .btn.active {
+        outline: 0px !important;
+        -webkit-appearance: none;
+        box-shadow: none !important;
+    }
+
+    textarea {
+        resize: none;
+    }
+
+    .row {
+        // width: 100% !important;
+        width: unset;
+        clear: unset;
+    }
+
+    button {
+        &:focus {
+            outline: none;
+            outline: 0px !important;
+            -webkit-appearance: none;
+            box-shadow: none !important;
+        }
+    }
+
+    .modalHeader {
+        width: 100%;
+        text-align: center;
+
+        h2 {
+            color: #006492;
+        }
+    }
+
+    .modalBody {
+        padding-right: 4px;
+        width: 100%;
+        max-height: 480px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .modalFooter {
+        width: 100%;
+        text-align: right;
+        margin-top: 10px;
+    }
+
+    .closeModal {
+        width: 100%;
+        text-align: right;
+        //  margin-bottom: 10px;
+        color: #989494ab;
+        font-size: 1rem;
+
+        .iconClose {
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
+    .buttonDanger {
+        width: auto;
+        height: auto;
+        line-height: normal;
+        padding: 8px;
+        background: rgb(231, 3, 3);
+        color: white;
+        margin: 0;
+        border: 1px solid rgb(231, 3, 3);
+        border-radius: 3px;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:disabled {
+            color: rgba(255, 255, 255, 0.637);
+            background: rgba(202, 0, 0, 0.705);
+            border: 1px solid rgba(202, 0, 0, 0.705);
+
+            &:hover {
+                cursor: no-drop;
+            }
+        }
+    }
+
+    .buttonSuccess {
+        width: auto;
+        height: auto;
+        line-height: normal;
+        padding: 8px;
+        background: rgb(5, 172, 13);
+        color: white;
+        margin: 0 4px 0 4px;
+        border: 1px solid rgb(5, 172, 13);
+        border-radius: 3px;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:disabled {
+            color: rgba(255, 255, 255, 0.637);
+            background: rgb(0, 149, 7);
+            border: 1px solid rgb(0, 149, 7);
+
+            &:hover {
+                cursor: no-drop;
+            }
+        }
+    }
+
+    .buttonOption {
+        width: auto;
+        height: auto;
+        line-height: normal;
+        padding: 8px;
+        background: rgb(5, 69, 172);
+        color: white;
+        margin: 0 4px 0 4px;
+        border: 1px solid rgb(5, 69, 172);
+        border-radius: 3px;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:disabled {
+            color: rgba(255, 255, 255, 0.637);
+            background: rgba(0, 49, 129, 0.733);
+            border: 1px solid rgba(0, 49, 129, 0.733);
+
+            &:hover {
+                cursor: no-drop;
+            }
+        }
+    }
+
+    .buttonBlackOption {
+        width: auto;
+        height: auto;
+        line-height: normal;
+        padding: 8px;
+        background: rgb(0, 146, 146);
+        color: white;
+        margin: 0 4px 0 4px;
+        border: 1px solid rgb(0, 146, 146);
+        border-radius: 2px;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:disabled {
+            color: rgba(255, 255, 255, 0.637);
+            background: rgba(0, 97, 97, 0.548);
+            border: 1px solid rgba(0, 97, 97, 0.548);
+
+            &:hover {
+                cursor: no-drop;
+            }
+        }
+    }
+
+    .buttonDefault {
+        width: auto;
+        height: auto;
+        line-height: normal;
+        padding: 8px 8px 8px 8px;
+        background: rgb(255, 255, 255);
+        color: rgb(0, 0, 0);
+        margin: 0 4px 0 4px;
+        border: 1px solid rgba(207, 207, 207, 0.486);
+        border-radius: 3px;
+        font-size: 0.8rem;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:disabled {
+            background: rgb(235, 235, 235);
+
+            &:hover {
+                cursor: no-drop;
+            }
+        }
+    }
+
+    .buttonSecondary {
+        width: auto;
+        height: auto;
+        line-height: normal;
+        padding: 8px;
+        background: rgb(146, 146, 146);
+        color: rgb(255, 255, 255);
+        margin: 0 4px 0 4px;
+        border: 1px solid rgb(179, 179, 179);
+        border-radius: 3px;
+
+        &:hover {
+            cursor: pointer;
+        }
+        &:disabled {
+            background: rgb(219, 219, 219);
+            &:hover {
+                cursor: no-drop;
+            }
+        }
+    }
+
+    label {
+        margin: 0px 0px 0px 0px;
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none;
+    }
+
+    ::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        background-color: #f5f5f5;
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+        background-color: #f5f5f5;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background: #868687;
+    }
+
+    .modal-holder {
+        animation-name: example;
+        animation-duration: 0.3s;
+    }
+
+    @keyframes example {
+        0% {
+            transform: scale(0.5);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .containerDiv {
+        width: 100%;
+        animation: fadein 1s;
+        -moz-animation: fadein 1s; /* Firefox */
+        -webkit-animation: fadein 1s; /* Safari and Chrome */
+        -o-animation: fadein 1s; /* Opera */
+    }
+
+    @keyframes fadein {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    @-moz-keyframes fadein {
+        /* Firefox */
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    @-webkit-keyframes fadein {
+        /* Safari and Chrome */
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    @-o-keyframes fadein {
+        /* Opera */
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+}

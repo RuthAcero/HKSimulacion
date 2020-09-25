@@ -1,0 +1,7 @@
+<ng-container *ngIf="seeMonitoring">
+  <app-monitoring (out)="getBack($event)"></app-monitoring>
+</ng-container>
+
+<ng-container *ngIf="seeList">
+  <app-table-devices></app-table-devices>
+</ng-container>

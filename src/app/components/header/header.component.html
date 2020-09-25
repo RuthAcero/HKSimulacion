@@ -1,0 +1,106 @@
+<div id="appHeader">
+  <div class="navAux">
+    <nav class="navbar navbar-expand-sm">
+      <div fxShow="true" fxHide.gt-sm="true" class="buttonContent">
+        <button class="iconHome" (click)="activeNav = !activeNav">
+          <fa-icon [icon]="['fas','home']"></fa-icon>
+        </button>
+        <label class="titleModule" *ngIf=" itemMenuSelected === 0"> Monitoreo </label>
+        <label class="titleModule" *ngIf=" itemMenuSelected === 1"> Reportes </label>
+        <label class="titleModule" *ngIf=" itemMenuSelected === 2"> Configuraciones </label>
+      </div>
+      <div fxShow="true" fxHide.lt-md="true">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <button class="buttonNav" [ngClass]="{ 'active' : itemMenuSelected === 0}" (click)="selectInMenu(0)">
+              Monitoreo
+            </button>
+          </li>
+          <li class="nav-item">
+            <button class="buttonNav" [ngClass]="{ 'active' : itemMenuSelected === 1}" (click)="selectInMenu(1)">
+              Reportes
+            </button>
+          </li>
+          <li class="nav-item">
+            <button class="buttonNav" [ngClass]="{ 'active' : itemMenuSelected === 2}" (click)="selectInMenu(2)">
+              Configuraciones
+            </button>
+          </li>
+        </ul>
+      </div>
+      <span fxShow="true" fxHide.lt-md="true" class="space-center"></span>
+      <div fxShow="true" fxHide.lt-md="true">
+        <button class="buttonProfile" (click)="op1.toggle($event)">
+          <fa-icon [icon]="['fas','user']"></fa-icon>
+        </button>
+        <p-overlayPanel #op1 [appendTo]="'body'" [style]="{ width: '300px', right:0}">
+          <div id="profileInfo">
+            <label class="title" [pTooltip]="userInfo.userName" tooltipPosition="top"> {{userInfo.userName}}
+            </label><br>
+            <label class="subTitle" [pTooltip]="userInfo.name + ' ' + userInfo.lastName" tooltipPosition="top">
+              {{userInfo.name}} {{userInfo.lastName}}
+            </label><br>
+            <div style="width: 100%; text-align: right; margin-top: 4px;">
+              <button class="buttonDefault" (click)="openModal(contentUpdateUser)">Editar</button>
+            </div>
+          </div>
+        </p-overlayPanel>
+      </div>
+    </nav>
+  </div>
+  <div id="mySidenav" [ngClass]="{'activeSidnav': activeNav}" class="sidenav">
+    <div class="header">
+      <button class="buttonClose" (click)="activeNav = !activeNav"> Cerrar </button>
+    </div>
+    <div class="buttonContainer" *ngIf="activeNav">
+      <label class="title"> {{userData.email}} </label><br>
+      <label class="subTitle"> {{userData.name}} </label>
+      <br>
+      <button class="buttonNavI" [ngClass]="{ 'activeInnav' : itemMenuSelected === 0}" (click)="selectInMenu(0)">
+        <fa-icon class="labelIcon" [icon]="['fas','list']"></fa-icon>
+        MM-CAM
+      </button>
+      <button class="buttonNavI" [ngClass]="{ 'activeInnav' : itemMenuSelected === 1}" (click)="selectInMenu(1)">
+        <fa-icon class="labelIcon" [icon]="['fas','exclamation-triangle']"></fa-icon>
+        Excepciones
+      </button>
+      <button class="buttonNavI" [ngClass]="{ 'activeInnav' : itemMenuSelected === 2}" (click)="selectInMenu(2)">
+        <fa-icon class="labelIcon" [icon]="['fas','cog']"></fa-icon>
+        Configuración
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<ng-template #contentUpdateUser let-modal>
+  <div class="modal-body" id="modalEditRolUse">
+    <ngx-ui-loader [loaderId]="'loader-userLog'" [text]="textLoader"></ngx-ui-loader>
+    <div class="modalHeader">
+      <div class="closeModal">
+        <fa-icon class="iconClose" [icon]="['fas','times-circle']" (click)="closeModal()"></fa-icon>
+      </div>
+      <h2> {{titleModal}} </h2>
+    </div>
+    <div class="modalBody">
+      <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+      <div class="formGroup">
+        <label>Selección de zona horaria:</label>
+        <div style="text-align: right; margin-bottom: 6px; float: right;">
+          <label style="margin-right:8px">Horario de verano:</label>
+          <p-checkbox [(ngModel)]="isSummerTime" [binary]="true"></p-checkbox>
+        </div>
+        <ng-select [items]="lstTimeZones" bindLabel="name" [clearable]="false" [searchable]="false"
+          [(ngModel)]="timeZoneSelected" [dropdownPosition]="'top'">
+        </ng-select>
+      </div>
+    </div>
+    <div class="modalFooter">
+      <button class="buttonDefault" (click)="closeModal()"> Cancelar </button>
+      <button class="buttonDefault" (click)="updateData()"> Aceptar </button>
+    </div>
+  </div>
+</ng-template>

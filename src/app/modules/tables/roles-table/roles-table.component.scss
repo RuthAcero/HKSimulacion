@@ -1,0 +1,80 @@
+#appTablePermissions {
+    width: 100%;
+    .header {
+        width: 280px;
+    }
+
+    .iconCheck {
+        color: green;
+    }
+
+    .iconBan {
+        color: red;
+    }
+
+
+    .tableContainer {
+        margin-top: 10px;
+        table {
+            border: 1px solid rgba(84, 84, 85, 0.1);
+            margin-bottom: 0px !important;
+        }
+        th {
+            text-align: center;
+            color: rgb(255, 255, 255);
+            border: none;
+            font-weight: 800;
+
+            &:hover {
+                cursor: default;
+                -webkit-touch-callout: none; /* iOS Safari */
+                -webkit-user-select: none; /* Safari */
+                -khtml-user-select: none; /* Konqueror HTML */
+                -moz-user-select: none; /* Old versions of Firefox */
+                -ms-user-select: none; /* Internet Explorer/Edge */
+                user-select: none;
+            }
+        }
+
+        thead {
+            border: none;
+            border-bottom: 1px solid rgba(84, 84, 85, 0.1);
+            //      background: #003756;
+            background: #003756;
+        }
+    }
+
+    table tbody,
+    table thead {
+        display: block;
+        margin-bottom: 0px !important;
+    }
+
+    tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    }
+    td {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none;
+    }
+}
+
+::ng-deep .ui-chkbox .ui-chkbox-box.ui-state-active {
+    border-color: #449815 !important;
+    background-color: #449815 !important;
+    color: #ffffff !important;
+}
+
+::ng-ddep .ui-chkbox{
+    border: 1px solid #a69999 !important;
+    background-color: #ffffffbd !important;
+}

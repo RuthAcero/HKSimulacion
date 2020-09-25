@@ -1,0 +1,13 @@
+<ng-container *ngIf="seeApp">
+  <app-container> </app-container>
+  <div  toastContainer></div>
+</ng-container>
+<ng-container *ngIf="seeError">
+  <div id="containerText">
+    <img class="imgFailed" [src]="imgValue">
+    <h2 class="text"> {{textFailed}} </h2>
+  </div>
+</ng-container>
+<ngx-ui-loader [loaderId]="'loader-init'" [fgsType]="'folding-cube'" [bgsOpacity]="1" [text]="'Iniciando aplicación'"
+  [fgsSize]="50">
+</ngx-ui-loader>

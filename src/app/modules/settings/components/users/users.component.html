@@ -1,0 +1,113 @@
+<div id="appUsers">
+  <div class="row">
+    <div class="col-md-6">
+      <!-- 
+   <div class="containerFilter">
+        <span class="inp">
+          <fa-icon class="iconSearch" [icon]="['fas','search']"></fa-icon>
+        </span>
+        <input type="text" class="inputText" [(ngModel)]="textFilter" placeholder="Buscar usuario">
+      </div>
+       -->
+
+    </div>
+    <div class="col-md-6 buttonOptions">
+      <button class="buttonDefault" (click)="openCreate()"> Agregar </button>
+      <button class="buttonDanger" [disabled]="!lstDataSelect.length" (click)="deleteList(contentDeleteListUser)">
+        Eliminar
+      </button>
+    </div>
+  </div>
+  <ng-container *ngIf="seeTable">
+    <app-dynamic-table [columns]="columns" [data]="data" [editable]="editTable" [selection]="true"
+      [delete]="deleteTable" [exportable]="exportTable" [textFilter]="textFilter"
+      (selectionsData)="selectionList($event)" (itemSelection)="itemSelection($event)">
+    </app-dynamic-table>
+  </ng-container>
+</div>
+
+<ng-template #contentAddUser let-modal>
+  <div class="modal-body" id="modalAddUser">
+    <ngx-ui-loader [loaderId]="'loader-user-add'" [text]="textLoader"></ngx-ui-loader>
+    <div class="modalHeader">
+      <div class="closeModal">
+        <fa-icon class="iconClose" [icon]="['fas','times-circle']" (click)="closeModal()"></fa-icon>
+      </div>
+      <h2> {{titleModal}} </h2>
+    </div>
+    <div class="modalBody">
+      <div class="form-group">
+        <label> Selección usuario de geotab</label>
+        <ng-select [items]="lstUsersGeotab" bindLabel="userName" [(ngModel)]="userGeotabSelected"
+          (change)="changeSelected()">
+        </ng-select>
+      </div>
+      <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+    </div>
+    <div class="modalFooter">
+      <button class="buttonDefault" (click)="closeModal()"> Cancelar </button>
+      <button [disabled]="!form.valid" class="buttonDefault" (click)="save()">
+        Guardar
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #contentDeleteUser let-modal>
+  <div class="modal-body" id="modalDeleteUsers">
+    <ngx-ui-loader [loaderId]="'loader-user-delete'" [text]="textLoader"></ngx-ui-loader>
+    <div class="modalHeader">
+      <div class="closeModal">
+        <fa-icon class="iconClose" [icon]="['fas','times-circle']" (click)="closeModal()"></fa-icon>
+      </div>
+      <h2> {{titleModal}} </h2>
+    </div>
+    <div class="modalBody">
+      <label> <b>Nombre: </b> {{itemSelected?.name}} </label><br>
+      <label> <b>Apellido: </b> {{itemSelected?.lastName}} </label><br>
+      <label> <b>Rol: </b> {{itemSelected?.roleName}} </label><br>
+    </div>
+    <div class="modalFooter">
+      <button class="buttonDefault" (click)="closeModal()"> Cancelar </button>
+      <button class="buttonDefault" (click)="deleteData()"> Aceptar </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #contentDeleteListUser let-modal>
+  <div class="modal-body" id="modalDeleteUsers">
+    <ngx-ui-loader [loaderId]="'loader-user-delete-list'" [text]="textLoader"></ngx-ui-loader>
+    <div class="modalHeader">
+      <div class="closeModal">
+        <fa-icon class="iconClose" [icon]="['fas','times-circle']" (click)="closeModal()"></fa-icon>
+      </div>
+      <h2 *ngIf="!seeResultDelete"> {{titleModal}} </h2>
+    </div>
+    <div class="modalBody">
+      <ng-container *ngIf="!seeResultDelete">
+        <ng-container *ngFor="let item of lstDataSelect">
+          <br>
+          <div class="row itemRow">
+            <div class="col-md-6">
+              <label> <b>Usuario: </b> {{item.userName}} </label><br>
+              <label> <b>Nombre: </b> {{item.name}} </label><br>
+            </div>
+            <div class="col-md-6">
+              <label> <b>Apellidos: </b> {{item.lastName}} </label><br>
+              <label> <b>Rol: </b> {{item.role?.roleName}} </label><br>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+      <ng-container *ngIf="seeResultDelete">
+        <app-result-list [dataSuccess]="dataDeleteSuccess" [dataFailed]="dataDeleteFailed"></app-result-list>
+      </ng-container>
+    </div>
+    <div class="modalFooter">
+      <button class="buttonDefault" (click)="closeModal()"> Cancelar </button>
+      <button *ngIf="!seeResultDelete" class="buttonDefault" (click)="deleteDataList()"> Aceptar </button>
+    </div>
+  </div>
+</ng-template>
+
+<ngx-ui-loader [loaderId]="'loader-users'" [text]="textLoader"></ngx-ui-loader>

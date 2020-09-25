@@ -1,0 +1,107 @@
+<div id="appDevices">
+  <div class="row">
+    <div class="col-md-6">
+      <!-- 
+     <div class="containerFilter">
+        <span class="inp">
+          <fa-icon class="iconSearch" [icon]="['fas','search']"></fa-icon>
+        </span>
+        <input type="text" class="inputText" [(ngModel)]="textFilter" placeholder="Buscar dispositivo">
+      </div>
+       -->
+ 
+    </div>
+    <div class="col-md-6 buttonOptions">
+      <button class="buttonDefault" (click)="openCreate()"> Agregar </button>
+      <button class="buttonDanger" [disabled]="!lstDataSelect.length" (click)="deleteList(contentDeleteListST)">
+        Eliminar
+      </button>
+    </div>
+  </div>
+  <ng-container *ngIf="seeTable">
+    <app-dynamic-table [columns]="columns" [data]="data" [editable]="editTable" [selection]="true"
+      [delete]="deleteTable" [exportable]="exportTable" [textFilter]="textFilter"
+      (selectionsData)="selectionList($event)" (itemSelection)="itemSelection($event)">
+    </app-dynamic-table>
+  </ng-container>
+</div>
+
+<ng-template #contentAddDeviceST let-modal>
+  <div class="modal-body">
+    <ngx-ui-loader [loaderId]="'loader-dvst-add'" [text]="textLoader"></ngx-ui-loader>
+    <div class="modalHeader">
+      <div class="closeModal">
+        <fa-icon class="iconClose" [icon]="['fas','times-circle']" (click)="closeModal()"></fa-icon>
+      </div>
+      <h2> {{titleModal}} </h2>
+    </div>
+    <div class="modalBody">
+      <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+    </div>
+    <div class="modalFooter">
+      <button class="buttonDefault" (click)="closeModal()"> Cancelar </button>
+      <button [disabled]="!form.valid" class="buttonDefault" (click)="save()">
+        Guardar
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #contentDeleteST let-modal>
+  <div class="modal-body">
+    <ngx-ui-loader [loaderId]="'loader-st-delete'" [text]="textLoader"></ngx-ui-loader>
+    <div class="modalHeader">
+      <div class="closeModal">
+        <fa-icon class="iconClose" [icon]="['fas','times-circle']" (click)="closeModal()"></fa-icon>
+      </div>
+      <h2> {{titleModal}} </h2>
+    </div>
+    <div class="modalBody">
+      <label> <b>Económico: </b> {{itemSelected?.name}} </label><br>
+      <label> <b>IMEI: </b> {{itemSelected?.imei}} </label><br>
+      <label> <b>IMEI-CUT: </b> {{itemSelected?.imeiCut}} </label><br>
+      <label> <b>Placa: </b> {{itemSelected?.plate}} </label><br>
+      <label> <b>Comentarios: </b> {{itemSelected?.comments}} </label><br>
+    </div>
+    <div class="modalFooter">
+      <button class="buttonDefault" (click)="closeModal()"> Cancelar </button>
+      <button class="buttonDefault" (click)="deleteData()"> Aceptar </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #contentDeleteListST let-modal>
+  <div class="modal-body" id="modalDeleteUsers">
+    <ngx-ui-loader [loaderId]="'loader-st-delete-list'" [text]="textLoader"></ngx-ui-loader>
+    <div class="modalHeader">
+      <div class="closeModal">
+        <fa-icon class="iconClose" [icon]="['fas','times-circle']" (click)="closeModal()"></fa-icon>
+      </div>
+      <h2 *ngIf="!seeResultDelete"> {{titleModal}} </h2>
+    </div>
+    <div class="modalBody">
+      <ng-container *ngIf="!seeResultDelete">
+        <ng-container *ngFor="let item of lstDataSelect">
+          <br>
+          <div class="row itemRow">
+            <div class="col-md-6">
+              <label> <b>Económico: </b> {{item?.name}} </label><br>
+              <label> <b>IMEI: </b> {{item?.imei}} </label><br>
+            </div>
+            <div class="col-md-6">
+              <label> <b>IMEI-CUT: </b> {{item?.imeiCut}} </label><br>
+              <label> <b>Placa: </b> {{item?.plate}} </label><br>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+      <ng-container *ngIf="seeResultDelete">
+        <app-result-list [dataSuccess]="dataDeleteSuccess" [dataFailed]="dataDeleteFailed"></app-result-list>
+      </ng-container>
+    </div>
+    <div class="modalFooter">
+      <button class="buttonDefault" (click)="closeModal()"> Cancelar </button>
+      <button *ngIf="!seeResultDelete" class="buttonDefault" (click)="deleteDataList()"> Aceptar </button>
+    </div>
+  </div>
+</ng-template>

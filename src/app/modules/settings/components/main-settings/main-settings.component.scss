@@ -1,0 +1,15 @@
+#appMainSettings {
+    width: 100%;
+    padding: 0px 15px 0px 14px;
+
+    .list-group-item {
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .active-item {
+        background: #003756;
+        color: white;
+    }
+}

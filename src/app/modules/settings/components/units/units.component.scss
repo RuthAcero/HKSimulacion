@@ -1,0 +1,54 @@
+#appUnits {
+    .containerFilter {
+        width: 280px;
+        display: flex;
+    }
+
+    .buttonOptions {
+        width: 100%;
+        text-align: right;
+    }
+
+    .inp {
+        padding: 8px;
+        width: 40px;
+        text-align: center;
+        border: 1px solid rgba(206, 206, 206, 0.904);
+        border-right: 1px solid rgba(224, 224, 224, 0.904);
+        border-bottom-left-radius: 3px;
+        border-top-left-radius: 3px;
+    }
+
+    .inputText {
+        padding: 9px;
+        width: 100%;
+        border: 1px solid rgba(206, 206, 206, 0.904);
+        border-left: none;
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+    }
+}
+
+#modalAddDeviceGo {
+    ::ng-deep .form-control {
+        &:read-only {
+            background-color: #ffffff !important;
+
+            &:hover {
+                cursor: no-drop;
+            }
+        }
+
+        &:disabled {
+            background-color: #ffffff !important;
+
+            &:hover {
+                cursor: no-drop;
+            }
+        }
+    }
+}
+
+::ng-deep .ui-menuitem-text{
+    font-size: 0.9rem !important;
+}

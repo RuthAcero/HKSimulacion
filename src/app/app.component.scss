@@ -1,0 +1,49 @@
+#containerText {
+    width: 100%;
+    text-align: center;
+
+    .imgFailed {
+        width: 300px;
+        height: 300px;
+    }
+
+    .text {
+        color: #006492;
+    }
+}
+
+::ng-deep .modalFade .modal-dialog {
+    animation-name: fadeEvent;
+    animation-duration: 0.3s;
+}
+
+::ng-deep ng-select .ng-dropdown-panel .ng-dropdown-panel-items {
+    //height: 140px !important;
+    max-height: 140px !important;
+}
+
+@media only screen and (max-width: 600px), (min-width: 600px) and (max-width: 600px) {
+    ::ng-deep .modalFade .modal-dialog {
+        animation-name: fadeEvent;
+        animation-duration: 0.3s;
+        margin-left: 16% !important;
+    }
+}
+
+@keyframes fadeEvent {
+    0% {
+        transform: scale(0.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+::ng-deep .toast-container {
+    font-size: 0.8rem !important;
+    font-family: raleway, helveticaneue, helvetica neue, Helvetica, Arial, sans-serif !important;
+}
+
+::ng-deep .ui-tooltip {
+    max-width: 400px !important;
+}
